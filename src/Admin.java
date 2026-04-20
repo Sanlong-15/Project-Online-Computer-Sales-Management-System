@@ -1,9 +1,9 @@
 public class Admin {
-     private int adminId;
+    private int adminId;
     private String username;
     private String password;
 
-    Admin(int adminId, String username, String password) {
+    public Admin(int adminId, String username, String password) {
         this.adminId = adminId;
         this.username = username;
         this.password = password;
@@ -22,7 +22,9 @@ public class Admin {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        if (username != null && !username.isEmpty()) {
+            this.username = username;
+        }
     }
 
     public String getPassword() {
@@ -30,7 +32,8 @@ public class Admin {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        if (password != null && !password.isEmpty()) {
+            this.password = password;
+        }
     }
-
 }

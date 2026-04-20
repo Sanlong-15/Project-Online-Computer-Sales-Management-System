@@ -2,19 +2,21 @@ public class Order {
     private int orderId;
     private Customer customer;
     private Product product;
+    private Seller seller;     
     private ShoppingCart shoppingCart;
     private String orderDate;
     private double totalAmount;
     private String status;
 
-    Order(int orderId, Customer customer, Product product, ShoppingCart shoppingCart, String orderDate, double totalAmount, String status) {
-        this.orderId = orderId;
+    public Order(Customer customer, String orderDate, int orderId, Product product, Seller seller, ShoppingCart shoppingCart, String status, double totalAmount) {
         this.customer = customer;
-        this.product = product;
-        this.shoppingCart = shoppingCart;
         this.orderDate = orderDate;
-        this.totalAmount = totalAmount;
+        this.orderId = orderId;
+        this.product = product;
+        this.seller = seller;
+        this.shoppingCart = shoppingCart;
         this.status = status;
+        this.totalAmount = totalAmount;
     }
 
     public int getOrderId() {
@@ -54,7 +56,9 @@ public class Order {
     }
 
     public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
+        if (orderDate != null && !orderDate.isEmpty()) {
+            this.orderDate = orderDate;
+        }
     }
 
     public double getTotalAmount() {
@@ -62,7 +66,11 @@ public class Order {
     }
 
     public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+        if (totalAmount >= 0) {
+            this.totalAmount = totalAmount;
+        } else {
+            System.out.println("Total amount cannot be negative. Value not updated.");
+        }
     }
 
     public String getStatus() {
@@ -70,7 +78,17 @@ public class Order {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        if (status != null && !status.isEmpty()) {
+            this.status = status;
+        }
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 
     

@@ -34,7 +34,9 @@ public class Seller {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && !name.isEmpty()) {
+            this.name = name;
+        }
     }
 
     public String getAge() {
@@ -42,7 +44,9 @@ public class Seller {
     }
 
     public void setAge(String age) {
-        this.age = age;
+        if (age != null && !age.isEmpty()) {
+            this.age = age;
+        }
     }
 
     public String getPhone() {
@@ -50,6 +54,8 @@ public class Seller {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        if (phone != null && !phone.isEmpty()) {
+            this.phone = phone;
+        }
     }
 }

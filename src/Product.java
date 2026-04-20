@@ -1,18 +1,22 @@
-public class Product  {
+public class Product {
     private int serialNumberId;
     private String name;
     private String brand;
     private double price;
     private int stock;
     private String description;
+    private int sellerId;
+    private int adminId;
 
-    Product(int serialNumberId, String name, String brand, double price, int stock, String description) {
-        this.serialNumberId = serialNumberId;
-        this.name = name;
+    public Product(int adminId, String brand, String description, String name, double price, int sellerId, int serialNumberId, int stock) {
+        this.adminId = adminId;
         this.brand = brand;
-        this.price = price;
-        this.stock = stock;
         this.description = description;
+        this.name = name;
+        this.price = price;
+        this.sellerId = sellerId;
+        this.serialNumberId = serialNumberId;
+        this.stock = stock;
     }
 
     public int getSerialNumberId() {
@@ -28,7 +32,9 @@ public class Product  {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && !name.isEmpty()) {
+            this.name = name;
+        }
     }
 
     public String getBrand() {
@@ -36,7 +42,9 @@ public class Product  {
     }
 
     public void setBrand(String brand) {
-        this.brand = brand;
+        if (brand != null && !brand.isEmpty()) {
+            this.brand = brand;
+        }
     }
 
     public double getPrice() {
@@ -44,7 +52,11 @@ public class Product  {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        if (price >= 0) {
+            this.price = price;
+        } else {
+            System.out.println("Price cannot be negative. Value not updated.");
+        }
     }
 
     public int getStock() {
@@ -52,7 +64,11 @@ public class Product  {
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        if (stock >= 0) {
+            this.stock = stock;
+        } else {
+            System.out.println("Stock cannot be negative. Value not updated.");
+        }
     }
 
     public String getDescription() {
@@ -60,7 +76,25 @@ public class Product  {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (description != null) {
+            this.description = description;
+        }
+    }
+
+    public int getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
     }
 
 }

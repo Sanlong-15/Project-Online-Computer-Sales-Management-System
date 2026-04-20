@@ -2,12 +2,15 @@ public class ShoppingCart {
     private int cartId;
     private Customer customer;
     private Product product;
+    private int quantity;
     private double totalPrice;
 
-    ShoppingCart(int cartId, Customer customer, Product product, double totalPrice) {
+
+    public ShoppingCart(int cartId, Customer customer, Product product, int quantity, double totalPrice) {
         this.cartId = cartId;
         this.customer = customer;
         this.product = product;
+        this.quantity = quantity;
         this.totalPrice = totalPrice;
     }
 
@@ -33,6 +36,9 @@ public class ShoppingCart {
 
     public void setProduct(Product product) {
         this.product = product;
+        if (this.product != null && this.quantity > 0) {
+            this.totalPrice = this.product.getPrice() * this.quantity;
+        }
     }
 
     public double getTotalPrice() {
@@ -40,8 +46,26 @@ public class ShoppingCart {
     }
 
     public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+        if (totalPrice >= 0) {
+            this.totalPrice = totalPrice;
+        } else {
+            System.out.println("Total price cannot be negative. Value not updated.");
+        }
     }
 
-    
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        if (quantity > 0) {
+            this.quantity = quantity;
+            if (this.product != null) {
+                this.totalPrice = this.product.getPrice() * this.quantity;
+            }
+        } else {
+            System.out.println("Quantity must be greater than 0. Value not updated.");
+        }
+    }
+
 }

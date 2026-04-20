@@ -5,12 +5,12 @@ public class Payment {
     private double amount;
     private String paymentDate;
 
-    Payment(int paymentId, Order order, String paymentMethod, double amount, String paymentDate) {
-        this.paymentId = paymentId;
-        this.order = order;
-        this.paymentMethod = paymentMethod;
+    public Payment(double amount, Order order, String paymentDate, int paymentId, String paymentMethod) {
         this.amount = amount;
+        this.order = order;
         this.paymentDate = paymentDate;
+        this.paymentId = paymentId;
+        this.paymentMethod = paymentMethod;
     }
 
     public int getPaymentId() {
@@ -34,15 +34,20 @@ public class Payment {
     }
 
     public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+        if (paymentMethod != null && !paymentMethod.isEmpty()) {
+            this.paymentMethod = paymentMethod;
+        }
     }
-
     public double getAmount() {
         return amount;
     }
 
     public void setAmount(double amount) {
-        this.amount = amount;
+        if (amount >= 0) {
+            this.amount = amount;
+        } else {
+            System.out.println("Amount cannot be negative. Value not updated.");
+        }
     }
 
     public String getPaymentDate() {
@@ -50,12 +55,8 @@ public class Payment {
     }
 
     public void setPaymentDate(String paymentDate) {
-        this.paymentDate = paymentDate;
+        if (paymentDate != null && !paymentDate.isEmpty()) {
+            this.paymentDate = paymentDate;
+        }
     }
-
-
-
-    
-
-
 }
