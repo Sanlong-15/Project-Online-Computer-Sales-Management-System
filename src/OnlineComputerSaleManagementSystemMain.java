@@ -2,21 +2,11 @@ public class OnlineComputerSaleManagementSystemMain {
     public static void main(String[] args) {
 
         Admin admin1 = new Admin(100, "admin01", "adminPass123");
+        System.out.println(admin1);
 
-        System.out.println("Admin ID: " + admin1.getAdminId());
-        System.out.println("Username: " + admin1.getUsername());
-        System.out.println("Password: " + admin1.getPassword());
-
-        Customer c1 = new Customer("123 Main Street", "30", "New York", 1, "john@email.com", "John Doe", "123-456-7890", "10001");
-
-        System.out.println("Customer ID: " + c1.getCustomerId());
-        System.out.println("Name: " + c1.getName());
-        System.out.println("Age: " + c1.getAge());
-        System.out.println("Phone: " + c1.getPhone());
-        System.out.println("Email: " + c1.getEmail());
-        System.out.println("Address: " + c1.getAddress());
-        System.out.println("City: " + c1.getCity());
-        System.out.println("Postal Code: " + c1.getPostalCode());
+        Customer c1 = new Customer("123 Main Street", "30", "New York", 1, 
+                                   "john@email.com", "John Doe", "123-456-7890", "10001");
+        System.out.println(c1);
 
         //temporary product
         Product tempProduct = new Product(0, "", "", "", 0.0, 0, 0, 0);
@@ -27,18 +17,11 @@ public class OnlineComputerSaleManagementSystemMain {
         System.out.println("Seller Age: " + s1.getAge());
         System.out.println("Seller Phone: " + s1.getPhone());
 
-        Product p1 = new Product(admin1.getAdminId(), "Dell", "High-performance gaming laptop", "Gaming Laptop", 1200.0, s1.getSellerId(), 101, 5);
-        // Update seller's product to a real one
-        s1.setProduct(p1);
+        Product p1 = new Product(admin1.getAdminId(), "Dell", "High-performance gaming laptop", 
+                                 "Gaming Laptop", 1200.0, s1.getSellerId(), 101, 5);
+        s1.setProduct(p1);  // update seller's product
+        System.out.println(p1);
 
-        System.out.println("Serial Number: " + p1.getSerialNumberId());
-        System.out.println("Product Name: " + p1.getName());
-        System.out.println("Brand: " + p1.getBrand());
-        System.out.println("Price: $" + p1.getPrice());
-        System.out.println("Stock: " + p1.getStock());
-        System.out.println("Description: " + p1.getDescription());
-        System.out.println("Seller ID: " + p1.getSellerId());
-        System.out.println("Managed by Admin ID: " + p1.getAdminId());
 
         // calculate totalPrice manually for now: price * quantity
         double cartTotal = p1.getPrice() * 2;

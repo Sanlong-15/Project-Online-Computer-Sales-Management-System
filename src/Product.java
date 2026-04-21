@@ -96,5 +96,10 @@ public class Product {
     public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
-
+    @Override
+    public String toString() {
+    return "Product [serialNumberId=" + serialNumberId + ", name=" + name + ", brand=" + brand + 
+           ", price=" + price + ", stock=" + stock + ", description=" + description + 
+           ", sellerId=" + sellerId + ", adminId=" + adminId + "]";
+}
 }

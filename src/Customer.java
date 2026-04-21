@@ -94,4 +94,9 @@ public class Customer  {
             this.postalCode = postalCode;
         }
     }
+    @Override
+    public String toString() {
+    return "Customer [customerId=" + customerId + ", name=" + name + ", age=" + age + ", phone=" + phone + 
+           ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + "]";
+}
 }
