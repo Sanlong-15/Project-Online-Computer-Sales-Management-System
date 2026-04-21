@@ -31,7 +31,6 @@ public class OnlineComputerSaleManagementSystemMain {
         // Update seller's product to a real one
         s1.setProduct(p1);
 
-        System.out.println("=== PRODUCT ===");
         System.out.println("Serial Number: " + p1.getSerialNumberId());
         System.out.println("Product Name: " + p1.getName());
         System.out.println("Brand: " + p1.getBrand());
@@ -45,7 +44,6 @@ public class OnlineComputerSaleManagementSystemMain {
         double cartTotal = p1.getPrice() * 2;
         ShoppingCart cart1 = new ShoppingCart(301, c1, p1, 2, cartTotal);
 
-        System.out.println("=== SHOPPING CART ===");
         System.out.println("Cart ID: " + cart1.getCartId());
         System.out.println("Customer: " + cart1.getCustomer().getName());
         System.out.println("Product: " + cart1.getProduct().getName());
@@ -54,7 +52,6 @@ public class OnlineComputerSaleManagementSystemMain {
 
         Order o1 = new Order(c1, "2026-04-20", 1001, p1, s1, cart1, "Pending", cart1.getTotalPrice());
 
-        System.out.println("=== ORDER ===");
         System.out.println("Order ID: " + o1.getOrderId());
         System.out.println("Customer: " + o1.getCustomer().getName());
         System.out.println("Product: " + o1.getProduct().getName());
@@ -65,7 +62,6 @@ public class OnlineComputerSaleManagementSystemMain {
 
         Payment pay1 = new Payment(o1.getTotalAmount(), o1, "2026-04-20", 401, "Credit Card");
 
-        System.out.println("=== PAYMENT ===");
         System.out.println("Payment ID: " + pay1.getPaymentId());
         System.out.println("Order ID: " + pay1.getOrder().getOrderId());
         System.out.println("Payment Method: " + pay1.getPaymentMethod());
