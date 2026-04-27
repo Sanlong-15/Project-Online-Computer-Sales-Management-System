@@ -1,25 +1,29 @@
+import java.util.ArrayList;
+
 public class Order {
     private int orderId;
     private Customer customer;
-    private Product product;
-    private Seller seller;     
-    private ShoppingCart shoppingCart;
+    private ArrayList<Product> products;
+    private Seller seller;
     private String orderDate;
     private double totalAmount;
     private String status;
 
     private static int totalOrders = 0;
 
-    public Order(Customer customer, String orderDate, int orderId, Product product, Seller seller, ShoppingCart shoppingCart, String status, double totalAmount) {
-        setCustomer(customer);
-        setOrderDate(orderDate);
+    public Order(int orderId, Customer customer, Seller seller, String orderDate, String status) {
         setOrderId(orderId);
-        setProduct(product);
+        setCustomer(customer);
         setSeller(seller);
-        setShoppingCart(shoppingCart);
+        setOrderDate(orderDate);
         setStatus(status);
-        setTotalAmount(totalAmount);
+        this.products = new ArrayList<>();
+        this.totalAmount = 0;
         totalOrders++;
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
     }
 
     public static int getTotalOrders() { 
@@ -42,22 +46,6 @@ public class Order {
         this.customer = customer;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
-
     public String getOrderDate() {
         return orderDate;
     }
@@ -75,8 +63,6 @@ public class Order {
     public void setTotalAmount(double totalAmount) {
         if (totalAmount >= 0) {
             this.totalAmount = totalAmount;
-        } else {
-            System.out.println("Total amount cannot be negative. Value not updated.");
         }
     }
 
