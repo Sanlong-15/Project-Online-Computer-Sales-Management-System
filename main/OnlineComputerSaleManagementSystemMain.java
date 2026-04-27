@@ -1,3 +1,5 @@
+package main;
+
 public class OnlineComputerSaleManagementSystemMain {
     public static void main(String[] args) {
 
