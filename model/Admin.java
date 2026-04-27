@@ -3,12 +3,19 @@ public class Admin {
     private String username;
     private String password;
 
+    private static int adminCount = 0;
+
     public Admin(int adminId, String username, String password) {
         setAdminId(adminId);
         setUsername(username);
         setPassword(password);
+        adminCount++;
     }
 
+    public static int getAdminCount() {
+        return adminCount;
+    }   
+    
     public int getAdminId() {
         return adminId;
     }

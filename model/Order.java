@@ -8,6 +8,8 @@ public class Order {
     private double totalAmount;
     private String status;
 
+    private static int totalOrders = 0;
+
     public Order(Customer customer, String orderDate, int orderId, Product product, Seller seller, ShoppingCart shoppingCart, String status, double totalAmount) {
         setCustomer(customer);
         setOrderDate(orderDate);
@@ -17,6 +19,11 @@ public class Order {
         setShoppingCart(shoppingCart);
         setStatus(status);
         setTotalAmount(totalAmount);
+        totalOrders++;
+    }
+
+    public static int getTotalOrders() { 
+        return totalOrders;
     }
 
     public int getOrderId() {

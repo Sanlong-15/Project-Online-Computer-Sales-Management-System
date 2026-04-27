@@ -8,6 +8,8 @@ public class Product {
     private int sellerId;
     private int adminId;
 
+    private static int totalProducts = 0;
+
     public Product(int adminId, String brand, String description, String name, double price, int sellerId, int serialNumberId, int stock) {
         setAdminId(adminId);
         setBrand(brand);
@@ -17,6 +19,11 @@ public class Product {
         setSellerId(sellerId);
         setSerialNumberId(serialNumberId);
         setStock(stock);
+        totalProducts++;
+    }
+
+    public static int getTotalProducts() {
+        return totalProducts;
     }
 
     public int getSerialNumberId() {

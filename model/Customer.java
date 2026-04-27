@@ -8,6 +8,8 @@ public class Customer  {
     private String city;
     private String postalCode; 
 
+    private static int customerCount = 0;
+
     public Customer(String address, String age, String city, int customerId, String email, String name, String phone, String postalCode) {
         setAddress(address);
         setAge(age);
@@ -17,7 +19,12 @@ public class Customer  {
         setName(name);
         setPhone(phone);
         setPostalCode(postalCode);
+        customerCount++;
     }
+
+    public static int getCustomerCount() {
+    return customerCount;
+}
 
     public int getCustomerId() {
         return customerId;
