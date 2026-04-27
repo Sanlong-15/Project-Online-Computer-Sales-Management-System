@@ -1,11 +1,10 @@
 public class OnlineComputerSaleManagementSystemMain {
     public static void main(String[] args) {
 
-        Admin admin1 = new Admin(100, "admin01", "adminPass123");
+        Admin admin1 = new Admin(-10000000, "", "");
         System.out.println(admin1);
 
-        Customer c1 = new Customer("123 Main Street", "30", "New York", 1, 
-                                   "john@email.com", "John Doe", "123-456-7890", "10001");
+        Customer c1 = new Customer("123 Main Street", "30", "New York", 1, "john@email.com", "John Doe", "123-456-7890", "10001");
         System.out.println(c1);
 
         //temporary product
@@ -17,11 +16,9 @@ public class OnlineComputerSaleManagementSystemMain {
         System.out.println("Seller Age: " + s1.getAge());
         System.out.println("Seller Phone: " + s1.getPhone());
 
-        Product p1 = new Product(admin1.getAdminId(), "Dell", "High-performance gaming laptop", 
-                                 "Gaming Laptop", 1200.0, s1.getSellerId(), 101, 5);
+        Product p1 = new Product(admin1.getAdminId(), "Dell", "High-performance gaming laptop", "Gaming Laptop", 1200.0, s1.getSellerId(), 101, 5);
         s1.setProduct(p1);  // update seller's product
         System.out.println(p1);
-
 
         // calculate totalPrice manually for now: price * quantity
         double cartTotal = p1.getPrice() * 2;

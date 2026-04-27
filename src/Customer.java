@@ -9,21 +9,21 @@ public class Customer  {
     private String postalCode; 
 
     public Customer(String address, String age, String city, int customerId, String email, String name, String phone, String postalCode) {
-        this.address = address;
-        this.age = age;
-        this.city = city;
-        this.customerId = customerId;
-        this.email = email;
-        this.name = name;
-        this.phone = phone;
-        this.postalCode = postalCode;
+        setAddress(address);
+        setAge(age);
+        setCity(city);
+        setCustomerId(customerId);
+        setEmail(email);
+        setName(name);
+        setPhone(phone);
+        setPostalCode(postalCode);
     }
 
     public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    private void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -36,6 +36,7 @@ public class Customer  {
             this.name = name;
         }
     }
+
     public String getAge() {
         return age;
     }
@@ -55,6 +56,7 @@ public class Customer  {
             this.phone = phone;
         }
     }
+
     public String getEmail() {
         return email;
     }
@@ -94,9 +96,10 @@ public class Customer  {
             this.postalCode = postalCode;
         }
     }
+
     @Override
     public String toString() {
-    return "Customer [customerId=" + customerId + ", name=" + name + ", age=" + age + ", phone=" + phone + 
-           ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + "]";
-}
+        return "Customer [customerId=" + customerId + ", name=" + name + ", age=" + age + ", phone=" + phone + 
+               ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + "]";
+    }
 }

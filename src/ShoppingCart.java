@@ -5,20 +5,19 @@ public class ShoppingCart {
     private int quantity;
     private double totalPrice;
 
-
     public ShoppingCart(int cartId, Customer customer, Product product, int quantity, double totalPrice) {
-        this.cartId = cartId;
-        this.customer = customer;
-        this.product = product;
-        this.quantity = quantity;
-        this.totalPrice = totalPrice;
+        setCartId(cartId);
+        setCustomer(customer);
+        setProduct(product);
+        setQuantity(quantity);
+        setTotalPrice(totalPrice);
     }
 
     public int getCartId() {
         return cartId;
     }
 
-    public void setCartId(int cartId) {
+    private void setCartId(int cartId) {
         this.cartId = cartId;
     }
 
@@ -67,5 +66,4 @@ public class ShoppingCart {
             System.out.println("Quantity must be greater than 0. Value not updated.");
         }
     }
-
 }

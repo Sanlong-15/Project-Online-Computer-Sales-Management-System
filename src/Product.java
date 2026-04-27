@@ -9,21 +9,21 @@ public class Product {
     private int adminId;
 
     public Product(int adminId, String brand, String description, String name, double price, int sellerId, int serialNumberId, int stock) {
-        this.adminId = adminId;
-        this.brand = brand;
-        this.description = description;
-        this.name = name;
-        this.price = price;
-        this.sellerId = sellerId;
-        this.serialNumberId = serialNumberId;
-        this.stock = stock;
+        setAdminId(adminId);
+        setBrand(brand);
+        setDescription(description);
+        setName(name);
+        setPrice(price);
+        setSellerId(sellerId);
+        setSerialNumberId(serialNumberId);
+        setStock(stock);
     }
 
     public int getSerialNumberId() {
         return serialNumberId;
     }
 
-    public void setSerialNumberId(int serialNumberId) {
+    private void setSerialNumberId(int serialNumberId) {
         this.serialNumberId = serialNumberId;
     }
 
@@ -85,7 +85,7 @@ public class Product {
         return sellerId;
     }
 
-    public void setSellerId(int sellerId) {
+    private void setSellerId(int sellerId) {
         this.sellerId = sellerId;
     }
 
@@ -93,13 +93,14 @@ public class Product {
         return adminId;
     }
 
-    public void setAdminId(int adminId) {
+    private void setAdminId(int adminId) {
         this.adminId = adminId;
     }
+
     @Override
     public String toString() {
-    return "Product [serialNumberId=" + serialNumberId + ", name=" + name + ", brand=" + brand + 
-           ", price=" + price + ", stock=" + stock + ", description=" + description + 
-           ", sellerId=" + sellerId + ", adminId=" + adminId + "]";
-}
+        return "Product [serialNumberId=" + serialNumberId + ", name=" + name + ", brand=" + brand + 
+               ", price=" + price + ", stock=" + stock + ", description=" + description + 
+               ", sellerId=" + sellerId + ", adminId=" + adminId + "]";
+    }
 }

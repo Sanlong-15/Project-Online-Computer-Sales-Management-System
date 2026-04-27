@@ -9,21 +9,21 @@ public class Order {
     private String status;
 
     public Order(Customer customer, String orderDate, int orderId, Product product, Seller seller, ShoppingCart shoppingCart, String status, double totalAmount) {
-        this.customer = customer;
-        this.orderDate = orderDate;
-        this.orderId = orderId;
-        this.product = product;
-        this.seller = seller;
-        this.shoppingCart = shoppingCart;
-        this.status = status;
-        this.totalAmount = totalAmount;
+        setCustomer(customer);
+        setOrderDate(orderDate);
+        setOrderId(orderId);
+        setProduct(product);
+        setSeller(seller);
+        setShoppingCart(shoppingCart);
+        setStatus(status);
+        setTotalAmount(totalAmount);
     }
 
     public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    private void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
@@ -90,6 +90,4 @@ public class Order {
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
-
-    
 }

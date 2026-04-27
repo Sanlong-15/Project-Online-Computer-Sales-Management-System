@@ -4,25 +4,27 @@ public class Admin {
     private String password;
 
     public Admin(int adminId, String username, String password) {
-        this.adminId = adminId;
-        this.username = username;
-        this.password = password;
+        setAdminId(adminId);
+        setUsername(username);
+        setPassword(password);
     }
 
     public int getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(int adminId) {
+    private void setAdminId(int adminId) {
         this.adminId = adminId;
     }
-    
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
-        if (username != null && !username.isEmpty()) {
+        if (username == null || username.isEmpty()) {
+            this.username = "defaultUser";
+        } else {
             this.username = username;
         }
     }
@@ -31,14 +33,16 @@ public class Admin {
         return password;
     }
 
-    public void setPassword(String password) {
-        if (password != null && !password.isEmpty()) {
+    private void setPassword(String password) {
+        if (password == null || password.isEmpty()) {
+            this.password = "defaultPass";
+        } else {
             this.password = password;
         }
     }
 
     @Override
     public String toString() {
-    return "Admin [adminId=" + adminId + ", username=" + username + ", password=" + password + "]";
+        return "Admin [adminId=" + adminId + ", username=" + username + "]";
     }
 }

@@ -6,18 +6,18 @@ public class Seller {
     private String phone;
 
     Seller(int sellerId, Product product, String name, String age, String phone) {
-        this.sellerId = sellerId;
-        this.product = product;
-        this.name = name;
-        this.age = age;
-        this.phone = phone;
+        setSellerId(sellerId);
+        setProduct(product);
+        setName(name);
+        setAge(age);
+        setPhone(phone);
     }
 
     public int getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(int sellerId) {
+    private void setSellerId(int sellerId) {
         this.sellerId = sellerId;
     }
 

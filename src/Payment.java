@@ -6,18 +6,18 @@ public class Payment {
     private String paymentDate;
 
     public Payment(double amount, Order order, String paymentDate, int paymentId, String paymentMethod) {
-        this.amount = amount;
-        this.order = order;
-        this.paymentDate = paymentDate;
-        this.paymentId = paymentId;
-        this.paymentMethod = paymentMethod;
+        setAmount(amount);
+        setOrder(order);
+        setPaymentDate(paymentDate);
+        setPaymentId(paymentId);
+        setPaymentMethod(paymentMethod);
     }
 
     public int getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(int paymentId) {
+    private void setPaymentId(int paymentId) {
         this.paymentId = paymentId;
     }
 
@@ -38,6 +38,7 @@ public class Payment {
             this.paymentMethod = paymentMethod;
         }
     }
+
     public double getAmount() {
         return amount;
     }
