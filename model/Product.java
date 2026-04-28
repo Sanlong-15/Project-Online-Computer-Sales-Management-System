@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Product {
     private int serialNumberId;
     private String name;
@@ -10,7 +12,10 @@ public class Product {
     private int sellerId;
     private int adminId;
 
+   
     private static int totalProducts = 0;
+
+    private static ArrayList<Product> productList = new ArrayList<>();
 
     public Product(int adminId, String brand, String description, String name, double price, int sellerId, int serialNumberId, int stock) {
         setAdminId(adminId);
@@ -23,9 +28,21 @@ public class Product {
         setStock(stock);
         totalProducts++;
     }
-
+  
     public static int getTotalProducts() {
         return totalProducts;
+    }
+
+    public static void addProduct(Product product) {
+        productList.add(product);
+    }
+
+    public static int getProductListSize() {
+        return productList.size();
+    }
+
+    public static ArrayList<Product> getProductList() {
+        return productList;
     }
 
     public int getSerialNumberId() {
@@ -108,8 +125,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product [serialNumberId=" + serialNumberId + ", name=" + name + ", brand=" + brand + 
-               ", price=" + price + ", stock=" + stock + ", description=" + description + 
+        return "Product [serialNumberId=" + serialNumberId + ", name=" + name + ", brand=" + brand +
+               ", price=" + price + ", stock=" + stock + ", description=" + description +
                ", sellerId=" + sellerId + ", adminId=" + adminId + "]";
     }
 }
