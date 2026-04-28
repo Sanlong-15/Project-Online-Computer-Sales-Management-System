@@ -47,13 +47,22 @@ public class OnlineComputerSaleManagementSystemMain {
 
         System.out.println("\n||========== Shopping Cart ==========||");
 
-        double cartTotal = p1.getPrice() * 2;
-        ShoppingCart cart1 = new ShoppingCart(301, c1, 2, cartTotal);
+        // Create cart
+        ShoppingCart cart1 = new ShoppingCart(301, c1, 2, 0.0);
 
+        // Add multiple products into the cart
+        cart1.getProducts().add(p1);
+        cart1.getProducts().add(p2);
+
+        // Display cart info
         System.out.println("Cart ID: " + cart1.getCartId());
         System.out.println("Customer: " + cart1.getCustomer().getName());
-        System.out.println("Quantity: " + cart1.getQuantity());
-        System.out.println("Total Price: $" + cart1.getTotalPrice());
+
+        // Show all products in cart 
+        System.out.println("Products in Cart:");
+        for (Product p : cart1.getProducts()) {
+           System.out.println("- " + p.getName());
+        }
 
         System.out.println("\n||========== Order Information ==========||");
 
