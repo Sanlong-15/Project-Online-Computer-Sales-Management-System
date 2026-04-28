@@ -7,7 +7,7 @@ public class Seller {
     private String age;
     private String phone;
 
-    Seller(int sellerId, Product product, String name, String age, String phone) {
+    public Seller(int sellerId, Product product, String name, String age, String phone) {
         setSellerId(sellerId);
         setProduct(product);
         setName(name);
