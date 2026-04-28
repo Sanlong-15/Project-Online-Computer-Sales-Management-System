@@ -1,20 +1,22 @@
 package main;
-import java.util.ArrayList;
+
 import model.*;
 
 public class OnlineComputerSaleManagementSystemMain {
     public static void main(String[] args) {
 
-        System.out.println("||========== Object Creation ==========||");      
+        System.out.println("||========== Object Creation ==========||");
 
         Admin admin1 = new Admin(-10000000, "", "");
         System.out.println(admin1);
 
-        Customer c1 = new Customer("123 Main Street", "30", "New York", 1,
-                "john@email.com", "John Doe", "123-456-7890", "10001");
+        Customer c1 = new Customer(
+                "123 Main Street", "30", "New York", 1,
+                "john@email.com", "John Doe", "123-456-7890", "10001"
+        );
         System.out.println(c1);
 
-        // temporary product
+        // Temporary product for seller
         Product tempProduct = new Product(0, "", "", "", 0.0, 0, 0, 0);
         Seller s1 = new Seller(201, tempProduct, "Jane Smith", "28", "555-111-2222");
 
@@ -23,6 +25,7 @@ public class OnlineComputerSaleManagementSystemMain {
         System.out.println("Seller Age: " + s1.getAge());
         System.out.println("Seller Phone: " + s1.getPhone());
 
+        // Create products
         Product p1 = new Product(admin1.getAdminId(), "Dell",
                 "High-performance gaming laptop", "Gaming Laptop",
                 1200.0, s1.getSellerId(), 101, 5);
@@ -34,40 +37,33 @@ public class OnlineComputerSaleManagementSystemMain {
         s1.setProduct(p1);
         System.out.println(p1);
 
-        // Storing Multiple Objects 
-        ArrayList<Product> productList = new ArrayList<>();
-        productList.add(p1);
-        productList.add(p2);
-
-        System.out.println("\n||========== Loop Through Collection ==========||");
-
-        for (Product p : productList) {
-            System.out.println(p);
-        }
-
         System.out.println("\n||========== Shopping Cart ==========||");
 
-        // Create cart
-        ShoppingCart cart1 = new ShoppingCart(301, c1, 2, 0.0);
+        // ✅ New Cart (CartItem design)
+        ShoppingCart cart1 = new ShoppingCart(301, c1);
 
-        // Add multiple products into the cart
-        cart1.getProducts().add(p1);
-        cart1.getProducts().add(p2);
+        // ✅ Add items with quantities
+        cart1.addItem(p1, 1); // Laptop x1
+        cart1.addItem(p2, 2); // MacBook x2
 
-        // Display cart info
         System.out.println("Cart ID: " + cart1.getCartId());
         System.out.println("Customer: " + cart1.getCustomer().getName());
 
-        // Show all products in cart 
-        System.out.println("Products in Cart:");
-        for (Product p : cart1.getProducts()) {
-           System.out.println("- " + p.getName());
+        System.out.println("Items in Cart:");
+        for (CartItem item : cart1.getItems()) {
+            System.out.println(
+                item.getProduct().getName() +
+                " - Quantity: " + item.getQuantity()
+            );
         }
+
+        double total = cart1.calculateTotalPrice();
+        System.out.println("Total Price: $" + total);
 
         System.out.println("\n||========== Order Information ==========||");
 
         Order o1 = new Order(c1, "2026-04-20", 1001, s1, cart1,
-                "Pending", cart1.getTotalPrice());
+                "Pending", total);
 
         System.out.println("Order ID: " + o1.getOrderId());
         System.out.println("Customer: " + o1.getCustomer().getName());
@@ -98,8 +94,7 @@ public class OnlineComputerSaleManagementSystemMain {
 
         p1.setPrice(-100);
         p1.setStock(-5);
-        c1.setName("");  
-        cart1.setQuantity(0);
+        c1.setName("");
         o1.setTotalAmount(-50);
         pay1.setAmount(-20);
     }
