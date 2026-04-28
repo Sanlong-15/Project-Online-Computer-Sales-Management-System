@@ -1,9 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Order {
     private int orderId;
     private Customer customer;
-    private Product product;
+    private ArrayList<Product> products;
     private Seller seller;
     private ShoppingCart cart;
     private String orderDate;
@@ -12,16 +14,20 @@ public class Order {
 
     private static int totalOrders = 0;
 
-    public Order(Customer customer, String orderDate, int orderId, Product product, Seller seller, ShoppingCart cart, String status, double totalAmount) {
+    public Order(Customer customer, String orderDate, int orderId, Seller seller, ShoppingCart cart, String status, double totalAmount) {
         setOrderId(orderId);
         setCustomer(customer);
         setOrderDate(orderDate);
-        setProduct(product);
+        this.products = new ArrayList<>();
         setSeller(seller);
         setCart(cart);
         setStatus(status);
         setTotalAmount(totalAmount);
         totalOrders++;
+    }
+
+    public ArrayList<Product> getProducts() {
+    return products;
     }
 
     public static int getTotalOrders() {
@@ -42,14 +48,6 @@ public class Order {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public Seller getSeller() {

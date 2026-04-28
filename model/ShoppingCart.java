@@ -1,18 +1,24 @@
 package model;
 
+import java.util.ArrayList;
+
 public class ShoppingCart {
     private int cartId;
     private Customer customer;
-    private Product product;
+    private ArrayList<Product> products;
     private int quantity;
     private double totalPrice;
 
-    public ShoppingCart(int cartId, Customer customer, Product product, int quantity, double totalPrice) {
+    public ShoppingCart(int cartId, Customer customer, int quantity, double totalPrice) {
         setCartId(cartId);
         setCustomer(customer);
-        setProduct(product);
+        this.products = new ArrayList<>();
         setQuantity(quantity);
         setTotalPrice(totalPrice);
+    }
+
+        public ArrayList<Product> getProducts() {
+        return products;
     }
 
     public int getCartId() {
@@ -29,14 +35,6 @@ public class ShoppingCart {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public int getQuantity() {

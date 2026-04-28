@@ -1,6 +1,6 @@
 package main;
-import model.*;
 import java.util.ArrayList;
+import model.*;
 
 public class OnlineComputerSaleManagementSystemMain {
     public static void main(String[] args) {
@@ -48,22 +48,20 @@ public class OnlineComputerSaleManagementSystemMain {
         System.out.println("\n||========== Shopping Cart ==========||");
 
         double cartTotal = p1.getPrice() * 2;
-        ShoppingCart cart1 = new ShoppingCart(301, c1, p1, 2, cartTotal);
+        ShoppingCart cart1 = new ShoppingCart(301, c1, 2, cartTotal);
 
         System.out.println("Cart ID: " + cart1.getCartId());
         System.out.println("Customer: " + cart1.getCustomer().getName());
-        System.out.println("Product: " + cart1.getProduct().getName());
         System.out.println("Quantity: " + cart1.getQuantity());
         System.out.println("Total Price: $" + cart1.getTotalPrice());
 
         System.out.println("\n||========== Order Information ==========||");
 
-        Order o1 = new Order(c1, "2026-04-20", 1001, p1, s1, cart1,
+        Order o1 = new Order(c1, "2026-04-20", 1001, s1, cart1,
                 "Pending", cart1.getTotalPrice());
 
         System.out.println("Order ID: " + o1.getOrderId());
         System.out.println("Customer: " + o1.getCustomer().getName());
-        System.out.println("Product: " + o1.getProduct().getName());
         System.out.println("Seller: " + o1.getSeller().getName());
         System.out.println("Order Date: " + o1.getOrderDate());
         System.out.println("Status: " + o1.getStatus());

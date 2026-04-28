@@ -23,8 +23,13 @@ public class Admin {
     }
 
     private void setAdminId(int adminId) {
+    if (adminId > 0) {
         this.adminId = adminId;
+    } else {
+        this.adminId = 0; // default value
+        System.out.println("Invalid admin ID. Set to 0.");
     }
+}
 
     public String getUsername() {
         return username;
