@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Customer  {
     private int customerId;
     private String name;
@@ -9,7 +11,8 @@ public class Customer  {
     private String address;
     private String city;
     private String postalCode; 
-
+    private ShoppingCart cart;
+    private ArrayList<Order> orders;
     private static int customerCount = 0;
 
     public Customer(String address, String age, String city, int customerId, String email, String name, String phone, String postalCode) {
@@ -36,6 +39,13 @@ public class Customer  {
         this.customerId = customerId;
     }
 
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
+    public void setCart(ShoppingCart cart) {
+        this.cart = cart;
+    }
     public String getName() {
         return name;
     }
