@@ -16,9 +16,7 @@ public class OnlineComputerSaleManagementSystemMain {
         );
         System.out.println(c1);
 
-        // Temporary product for seller
-        Product tempProduct = new Product(0, "", "", "", 0.0, 0, 0, 0);
-        Seller s1 = new Seller(201, tempProduct, "Jane Smith", "28", "555-111-2222");
+        Seller s1 = new Seller(201, "Jane Smith", "28", "555-111-2222");
 
         System.out.println("Seller ID: " + s1.getSellerId());
         System.out.println("Seller Name: " + s1.getName());
@@ -34,15 +32,18 @@ public class OnlineComputerSaleManagementSystemMain {
                 "MacBook Pro M3", "MacBook Pro",
                 2500.0, s1.getSellerId(), 102, 3);
 
-        s1.setProduct(p1);
-        System.out.println(p1);
+        s1.addProduct(p1);
+        s1.addProduct(p2);
+
+        System.out.println("\n||========== Seller Products ==========||");
+        for (Product p : s1.getProducts()) {
+            System.out.println(p);
+        }
 
         System.out.println("\n||========== Shopping Cart ==========||");
 
-        // ✅ New Cart (CartItem design)
         ShoppingCart cart1 = new ShoppingCart(301, c1);
 
-        // ✅ Add items with quantities
         cart1.addItem(p1, 1); // Laptop x1
         cart1.addItem(p2, 2); // MacBook x2
 
@@ -52,8 +53,8 @@ public class OnlineComputerSaleManagementSystemMain {
         System.out.println("Items in Cart:");
         for (CartItem item : cart1.getItems()) {
             System.out.println(
-                item.getProduct().getName() +
-                " - Quantity: " + item.getQuantity()
+                    item.getProduct().getName() +
+                    " - Quantity: " + item.getQuantity()
             );
         }
 
@@ -71,6 +72,14 @@ public class OnlineComputerSaleManagementSystemMain {
         System.out.println("Order Date: " + o1.getOrderDate());
         System.out.println("Status: " + o1.getStatus());
         System.out.println("Total Amount: $" + o1.getTotalAmount());
+
+        System.out.println("Ordered Items:");
+        for (CartItem item : o1.getOrderedItems()) {
+            System.out.println(
+                    item.getProduct().getName() +
+                    " - Quantity: " + item.getQuantity()
+            );
+        }
 
         System.out.println("\n||========== Payment Information ==========||");
 

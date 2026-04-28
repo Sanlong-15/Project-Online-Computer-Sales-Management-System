@@ -5,9 +5,8 @@ import java.util.ArrayList;
 public class Order {
     private int orderId;
     private Customer customer;
-    private ArrayList<Product> products;
+    private ArrayList<CartItem> orderedItems; 
     private Seller seller;
-    private ShoppingCart cart;
     private String orderDate;
     private double totalAmount;
     private String status;
@@ -18,16 +17,22 @@ public class Order {
         setOrderId(orderId);
         setCustomer(customer);
         setOrderDate(orderDate);
-        this.products = new ArrayList<>();
         setSeller(seller);
-        setCart(cart);
         setStatus(status);
         setTotalAmount(totalAmount);
+
+        this.orderedItems = new ArrayList<>();
+        for (CartItem item : cart.getItems()) {
+            this.orderedItems.add(
+                new CartItem(item.getProduct(), item.getQuantity())
+            );
+        }
+
         totalOrders++;
     }
 
-    public ArrayList<Product> getProducts() {
-    return products;
+    public ArrayList<CartItem> getOrderedItems() {
+        return orderedItems;
     }
 
     public static int getTotalOrders() {
@@ -56,14 +61,6 @@ public class Order {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
-    }
-
-    public ShoppingCart getCart() {
-        return cart;
-    }
-
-    public void setCart(ShoppingCart cart) {
-        this.cart = cart;
     }
 
     public String getOrderDate() {
