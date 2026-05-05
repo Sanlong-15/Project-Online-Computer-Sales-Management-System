@@ -12,7 +12,6 @@ public class Product {
     private int sellerId;
     private int adminId;
 
-   
     private static int totalProducts = 0;
 
     private static ArrayList<Product> productList = new ArrayList<>();
