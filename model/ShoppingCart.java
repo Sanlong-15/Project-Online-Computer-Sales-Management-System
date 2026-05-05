@@ -9,8 +9,8 @@ public class ShoppingCart {
     private double totalPrice;
 
     public ShoppingCart(int cartId, Customer customer) {
-        this.cartId = cartId;
-        this.customer = customer;
+        setCartId(cartId);
+        setCustomer(customer);
         this.items = new ArrayList<>();
     }
 
@@ -36,5 +36,13 @@ public class ShoppingCart {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
