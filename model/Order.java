@@ -10,7 +10,6 @@ public class Order {
     private String orderDate;
     private double totalAmount;
     private String status;
-
     private static int totalOrders = 0;
 
     public Order(Customer customer, String orderDate, int orderId, Seller seller, ShoppingCart cart, String status, double totalAmount) {

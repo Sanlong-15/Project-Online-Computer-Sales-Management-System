@@ -7,7 +7,7 @@ public class OnlineComputerSaleManagementSystemMain {
 
         System.out.println("||========== Object Creation ==========||");
 
-        Admin admin1 = new Admin(-10000000, "", "");
+        Admin admin1 = new Admin(1001, "Alice Johnson", "alice@email.com");
         System.out.println(admin1);
 
         Customer c1 = new Customer(
@@ -53,8 +53,7 @@ public class OnlineComputerSaleManagementSystemMain {
         System.out.println("Items in Cart:");
         for (CartItem item : cart1.getItems()) {
             System.out.println(
-                    item.getProduct().getName() +
-                    " - Quantity: " + item.getQuantity()
+                    item.getProduct().getName() + " - Quantity: " + item.getQuantity()
             );
         }
 
@@ -76,8 +75,7 @@ public class OnlineComputerSaleManagementSystemMain {
         System.out.println("Ordered Items:");
         for (CartItem item : o1.getOrderedItems()) {
             System.out.println(
-                    item.getProduct().getName() +
-                    " - Quantity: " + item.getQuantity()
+                    item.getProduct().getName() + " - Quantity: " + item.getQuantity()
             );
         }
 
@@ -106,5 +104,5 @@ public class OnlineComputerSaleManagementSystemMain {
         c1.setName("");
         o1.setTotalAmount(-50);
         pay1.setAmount(-20);
-    }
+    } 
 }
