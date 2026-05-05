@@ -6,7 +6,7 @@ public class CartItem {
 
     public CartItem(Product product, int quantity) {
         this.product = product;
-        setQuantity(quantity);
+        this.quantity = quantity;
     }
 
     public Product getProduct() {
@@ -20,8 +20,10 @@ public class CartItem {
     public void setQuantity(int quantity) {
         if (quantity > 0) {
             this.quantity = quantity;
-        } else {
-            System.out.println("Quantity must be greater than 0.");
         }
+    }
+
+    public double getSubTotal() {
+        return product.getPrice() * quantity;
     }
 }
