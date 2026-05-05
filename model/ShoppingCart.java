@@ -6,7 +6,6 @@ public class ShoppingCart {
     private int cartId;
     private Customer customer;
     private ArrayList<CartItem> items;
-    private double totalPrice;
 
     public ShoppingCart(int cartId, Customer customer) {
         this.cartId = cartId;
@@ -25,7 +24,7 @@ public class ShoppingCart {
     public double calculateTotalPrice() {
         double total = 0;
         for (CartItem item : items) {
-            total += item.getProduct().getPrice() * item.getQuantity();
+            total += item.getSubTotal();
         }
         return total;
     }
