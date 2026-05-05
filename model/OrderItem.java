@@ -1,5 +1,4 @@
 package model;
-
 public class OrderItem {
     private String productName;
     private double priceAtPurchase;
