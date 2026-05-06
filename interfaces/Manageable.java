@@ -1,6 +1,8 @@
 package interfaces;
 
+import model.Product;
+
 public interface Manageable {
-    void addItem(Object item);
-    void removeItem(Object item);
+    void addItem(Product product, int quantity);
+    void removeItem(Product product);
 }

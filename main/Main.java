@@ -7,10 +7,10 @@ public class Main {
 
         // Create Customer
         Customer customer = new Customer(
-            "Phnom Penh",   // address
-            "20",           // age
-            "Phnom Penh",   // city
-            1,              // customerId
+            "Phnom Penh",   
+            "20",           
+            "Phnom Penh",   
+            1,              
             "alice@email.com",
             "Alice",
             "012345678",
@@ -21,8 +21,14 @@ public class Main {
         Seller seller = new Seller(1, "Tech Store", "30", "098765432");
 
         // Create Products
-        Product p1 = new Product(1, "Dell", "Gaming Laptop", "Laptop", 1200.0, 1, 101, 10);
-        Product p2 = new Product(1, "Logitech", "Wireless Mouse", "Mouse", 25.0, 1, 102, 50);
+        Product p1 = new Product(1, "Dell", "A powerful laptop for work and gaming", "Laptop", 1500.0, 1, 10);
+        Product p2 = new Product(1, "Samsung", "Latest smartphone with advanced features", "Smartphone", 800.0, 2, 20);
+
+        // Display Product Info
+        p1.display();
+        System.out.println();
+        p2.display();
+        System.out.println();
 
         // Create Cart
         ShoppingCart cart = new ShoppingCart(1, customer);
@@ -32,16 +38,7 @@ public class Main {
         cart.addItem(p2, 2);
 
         // Display Cart
-        System.out.println("=== CART ===");
-        for (CartItem item : cart.getItems()) {
-            System.out.println(
-                item.getProduct().getName() +
-                " | Qty: " + item.getQuantity() +
-                " | Subtotal: $" + item.getSubTotal()
-            );
-        }
-
-        System.out.println("Cart Total: $" + cart.calculateTotalPrice());
+        cart.display();
 
         // Create Order (checkout)
         Order order = new Order(
@@ -54,21 +51,22 @@ public class Main {
         );
 
         // Display Order
-        System.out.println("\n=== ORDER ===");
-        for (OrderItem item : order.getOrderedItems()) {
-            System.out.println(
-                item.getProductName() +
-                " | Qty: " + item.getQuantity() +
-                " | Subtotal: $" + item.getSubTotal()
-            );
-        }
+        order.display();
+        
+        // Print Order Receipt
+        // System.out.println("About to call order.printSummary()");
+        order.printSummary();
+           
+        // Create Payment
+        Payment payment = new Payment(
+            order.getTotalAmount(),
+            order,
+            "2026-05-06",
+            5001,
+            "Credit Card"
+        );
+        // Display Payment Summary
+        payment.printSummary();
 
-        System.out.println("Order Total: $" + order.getTotalAmount());
-
-        System.out.println("\n=== TEST: Change Product Price ===");
-        p1.setPrice(2000.0);
-
-        System.out.println("Cart Total after price change: $" + cart.calculateTotalPrice());
-        System.out.println("Order Total after price change: $" + order.getTotalAmount());
     }
 }

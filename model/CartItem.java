@@ -1,6 +1,9 @@
 package model;
 
-public class CartItem {
+import interfaces.Displayable;
+import interfaces.Calculatable;
+
+public class CartItem implements Displayable, Calculatable {
     private Product product;
     private int quantity;
 
@@ -26,4 +29,18 @@ public class CartItem {
     public double getSubTotal() {
         return product.getPrice() * quantity;
     }
+
+    @Override
+    public double calculateTotal() {
+        return product.getPrice() * quantity;
+    }
+
+    @Override
+    public void display() {
+        System.out.println("===== CART ITEM =====");
+        System.out.println("Product: " + product.getName());
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Subtotal: $" + calculateTotal());
+    }
+
 }

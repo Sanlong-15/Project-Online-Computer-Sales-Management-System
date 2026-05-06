@@ -1,8 +1,9 @@
 package model;
 
+import interfaces.Displayable;
 import java.util.ArrayList;
 
-public class Customer  {
+public class Customer implements Displayable {
     private int customerId;
     private String name;
     private String age;
@@ -116,9 +117,20 @@ public class Customer  {
         }
     }
 
+    // @Override
+    // public String toString() {
+    //     return "Customer [customerId=" + customerId + ", name=" + name + ", age=" + age + ", phone=" + phone + 
+    //            ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + "]";
+    // }
+
     @Override
-    public String toString() {
-        return "Customer [customerId=" + customerId + ", name=" + name + ", age=" + age + ", phone=" + phone + 
-               ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + "]";
+    public void display() {
+        System.out.println("===== CUSTOMER INFO =====");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Name: " + name);
+        System.out.println("Phone: " + phone);
+        System.out.println("Email: " + email);
+        System.out.println("Address: " + address);
     }
+
 }

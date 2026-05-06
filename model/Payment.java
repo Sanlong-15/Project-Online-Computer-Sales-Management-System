@@ -1,6 +1,8 @@
 package model;
 
-public class Payment {
+import interfaces.Printable;
+
+public class Payment implements Printable {
     private int paymentId;
     private Order order;
     private String paymentMethod;
@@ -61,5 +63,15 @@ public class Payment {
         if (paymentDate != null && !paymentDate.isEmpty()) {
             this.paymentDate = paymentDate;
         }
+    }
+
+    @Override
+    public void printSummary() {
+        System.out.println("===== PAYMENT SUMMARY =====");
+        System.out.println("Payment ID: " + paymentId);
+        System.out.println("Order ID: " + order.getOrderId());
+        System.out.println("Amount: $" + amount);
+        System.out.println("Payment Method: " + paymentMethod);
+        System.out.println("Payment Date: " + paymentDate);
     }
 }

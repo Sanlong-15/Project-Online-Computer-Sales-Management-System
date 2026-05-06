@@ -1,8 +1,9 @@
 package model;
 
+import interfaces.Displayable;
 import java.util.ArrayList;
 
-public class Product {
+public class Product implements Displayable {
     private int serialNumberId;
     private String name;
     private String brand;
@@ -112,10 +113,22 @@ public class Product {
         this.adminId = adminId;
     }
 
+    // @Override
+    // public String toString() {
+    //     return "Product [serialNumberId=" + serialNumberId + ", name=" + name + ", brand=" + brand +
+    //            ", price=" + price + ", stock=" + stock + ", description=" + description +
+    //            ", adminId=" + adminId + "]";
+    // }
+
     @Override
-    public String toString() {
-        return "Product [serialNumberId=" + serialNumberId + ", name=" + name + ", brand=" + brand +
-               ", price=" + price + ", stock=" + stock + ", description=" + description +
-               ", adminId=" + adminId + "]";
+    public void display() {
+        System.out.println("===== PRODUCT INFO =====");
+        System.out.println("ID: " + serialNumberId);
+        System.out.println("Name: " + name);
+        System.out.println("Brand: " + brand);
+        System.out.println("Price: $" + price);
+        System.out.println("Stock: " + stock);
+        System.out.println("Description: " + description);
+
     }
 }

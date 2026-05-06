@@ -1,8 +1,11 @@
 package model;
 
+import interfaces.Calculatable;
+import interfaces.Displayable;
+import interfaces.Printable;
 import java.util.ArrayList;
 
-public class Order {
+public class Order implements Displayable, Calculatable, Printable{
     private int orderId;
     private Customer customer;
     private ArrayList<OrderItem> orderedItems;
@@ -21,7 +24,9 @@ public class Order {
         this.orderedItems = new ArrayList<>();
         for (CartItem item : cart.getItems()) {
             this.orderedItems.add(new OrderItem(item));
+            System.out.println("Added OrderItem: " + item.getProduct().getName());
         }
+        System.out.println("Total OrderItems created: " + orderedItems.size());
         totalOrders++;
     }
 
@@ -84,4 +89,42 @@ public class Order {
             this.status = status;
         }
     }
+
+    @Override
+    public double calculateTotal() {
+
+        double total = 0;
+
+        for (OrderItem item : orderedItems) {
+            total += item.getSubTotal();
+        }
+
+        return total;
+    }
+
+    @Override
+    public void display() {
+
+        System.out.println("===== ORDER INFO =====");
+        System.out.println("Order ID: " + orderId);
+        System.out.println("Customer: " + customer.getName());
+        System.out.println("Total Order Amount: $" + calculateTotal());
+    }
+
+    @Override
+    public void printSummary() {
+
+        System.out.println("===== ORDER RECEIPT =====");
+        System.out.println("Order ID: " + orderId);
+        System.out.println("Customer: " + customer.getName());
+        System.out.println("Number of items: " + orderedItems.size());
+
+        for (OrderItem item : orderedItems) {
+            System.out.println(
+                item.getProductName() + " x " + item.getQuantity() + " = $" + item.getSubTotal());
+        }
+
+        System.out.println("Total Amount Order: $" + calculateTotal());
+    }
+
 }
