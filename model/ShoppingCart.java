@@ -14,7 +14,14 @@ public class ShoppingCart {
     }
 
     public void addItem(Product product, int quantity) {
-        items.add(new CartItem(product, quantity));
+
+        if (quantity <= product.getStock()) {
+            items.add(new CartItem(product, quantity));
+            System.out.println("Item added to cart.");
+        } else {
+            System.out.println("Not enough stock available.");
+        }
+
     }
 
     public ArrayList<CartItem> getItems() {
@@ -23,9 +30,11 @@ public class ShoppingCart {
 
     public double calculateTotalPrice() {
         double total = 0;
+
         for (CartItem item : items) {
             total += item.getSubTotal();
         }
+
         return total;
     }
 

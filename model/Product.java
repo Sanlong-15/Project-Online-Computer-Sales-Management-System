@@ -9,20 +9,18 @@ public class Product {
     private double price;
     private int stock;
     private String description;
-    private int sellerId;
     private int adminId;
 
     private static int totalProducts = 0;
 
     private static ArrayList<Product> productList = new ArrayList<>();
 
-    public Product(int adminId, String brand, String description, String name, double price, int sellerId, int serialNumberId, int stock) {
+    public Product(int adminId, String brand, String description, String name, double price, int serialNumberId, int stock) {
         setAdminId(adminId);
         setBrand(brand);
         setDescription(description);
         setName(name);
         setPrice(price);
-        setSellerId(sellerId);
         setSerialNumberId(serialNumberId);
         setStock(stock);
         totalProducts++;
@@ -106,14 +104,6 @@ public class Product {
         }
     }
 
-    public int getSellerId() {
-        return sellerId;
-    }
-
-    private void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
-    }
-
     public int getAdminId() {
         return adminId;
     }
@@ -126,6 +116,6 @@ public class Product {
     public String toString() {
         return "Product [serialNumberId=" + serialNumberId + ", name=" + name + ", brand=" + brand +
                ", price=" + price + ", stock=" + stock + ", description=" + description +
-               ", sellerId=" + sellerId + ", adminId=" + adminId + "]";
+               ", adminId=" + adminId + "]";
     }
 }
