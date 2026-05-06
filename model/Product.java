@@ -121,7 +121,7 @@ public class Product implements Displayable {
     // }
 
     @Override
-    public void display() {
+    public void displayInfo() {
         System.out.println("===== PRODUCT INFO =====");
         System.out.println("ID: " + serialNumberId);
         System.out.println("Name: " + name);

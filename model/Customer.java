@@ -124,7 +124,7 @@ public class Customer implements Displayable {
     // }
 
     @Override
-    public void display() {
+    public void displayInfo() {
         System.out.println("===== CUSTOMER INFO =====");
         System.out.println("Customer ID: " + customerId);
         System.out.println("Name: " + name);

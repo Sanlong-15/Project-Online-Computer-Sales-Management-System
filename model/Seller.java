@@ -1,8 +1,9 @@
 package model;
 
+import interfaces.Displayable;
 import java.util.ArrayList;
 
-public class Seller {
+public class Seller implements Displayable {
     private int sellerId;
     private ArrayList<Product> products;
     private String name;
@@ -61,5 +62,14 @@ public class Seller {
         if (phone != null && !phone.isEmpty()) {
             this.phone = phone;
         }
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("===== SELLER INFO =====");
+        System.out.println("ID: " + sellerId);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Phone: " + phone);
     }
 }

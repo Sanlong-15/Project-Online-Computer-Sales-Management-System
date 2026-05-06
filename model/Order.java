@@ -103,7 +103,7 @@ public class Order implements Displayable, Calculatable, Printable{
     }
 
     @Override
-    public void display() {
+    public void displayInfo() {
 
         System.out.println("===== ORDER INFO =====");
         System.out.println("Order ID: " + orderId);
@@ -112,7 +112,7 @@ public class Order implements Displayable, Calculatable, Printable{
     }
 
     @Override
-    public void printSummary() {
+    public void printReceipt() {
 
         System.out.println("===== ORDER RECEIPT =====");
         System.out.println("Order ID: " + orderId);

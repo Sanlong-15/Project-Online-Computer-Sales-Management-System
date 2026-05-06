@@ -72,14 +72,14 @@ public class ShoppingCart implements Displayable, Calculatable, Manageable {
     }
 
     @Override
-    public void display() {
+    public void displayInfo() {
 
         System.out.println("===== SHOPPING CART =====");
         System.out.println("Cart ID: " + cartId);
         System.out.println("Customer: " + customer.getName());
 
         for (CartItem item : items) {
-            item.display();
+            item.displayInfo();
         }
 
         System.out.println("Total Price: $" + calculateTotal());

@@ -66,8 +66,8 @@ public class Payment implements Printable {
     }
 
     @Override
-    public void printSummary() {
-        System.out.println("===== PAYMENT SUMMARY =====");
+    public void printReceipt() {
+        System.out.println("===== PAYMENT RECEIPT =====");
         System.out.println("Payment ID: " + paymentId);
         System.out.println("Order ID: " + order.getOrderId());
         System.out.println("Amount: $" + amount);

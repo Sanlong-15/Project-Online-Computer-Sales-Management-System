@@ -36,7 +36,7 @@ public class CartItem implements Displayable, Calculatable {
     }
 
     @Override
-    public void display() {
+    public void displayInfo() {
         System.out.println("===== CART ITEM =====");
         System.out.println("Product: " + product.getName());
         System.out.println("Quantity: " + quantity);
