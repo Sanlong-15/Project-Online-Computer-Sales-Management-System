@@ -58,7 +58,6 @@ public class Main {
            
         // Create Payment
         Payment payment = new Payment(
-            order.getTotalAmount(),
             order,
             "2026-05-06",
             5001,

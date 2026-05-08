@@ -9,13 +9,14 @@ public class Payment implements Printable {
     private double amount;
     private String paymentDate;
 
-    public Payment(double amount, Order order, String paymentDate, int paymentId, String paymentMethod) {
-        setAmount(amount);
+    public Payment(Order order, String paymentDate, int paymentId, String paymentMethod) {
         setOrder(order);
         setPaymentDate(paymentDate);
         setPaymentId(paymentId);
         setPaymentMethod(paymentMethod);
-    }
+
+    this.amount = order.calculateTotal();
+}
 
     public int getPaymentId() {
         return paymentId;

@@ -20,16 +20,6 @@ public class ShoppingCart implements Displayable, Calculatable, Manageable {
         return items;
     }
 
-    public double calculateTotalPrice() {
-        double total = 0;
-
-        for (CartItem item : items) {
-            total += item.getSubTotal();
-        }
-
-        return total;
-    }
-
     public int getCartId() {
         return cartId;
     }
@@ -41,7 +31,7 @@ public class ShoppingCart implements Displayable, Calculatable, Manageable {
     @Override
     public void addItem(Product product, int quantity) {
 
-        if (quantity <= product.getStock()) {
+        if (quantity > 0 && quantity <= product.getStock()) {
             items.add(new CartItem(product, quantity));
             System.out.println("Item added to cart.");
         } else {
@@ -65,7 +55,7 @@ public class ShoppingCart implements Displayable, Calculatable, Manageable {
         double total = 0;
 
         for (CartItem item : items) {
-            total += item.calculateTotal();
+            total += item.getSubTotal();
         }
 
         return total;

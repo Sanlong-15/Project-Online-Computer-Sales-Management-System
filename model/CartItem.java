@@ -1,7 +1,7 @@
 package model;
 
-import interfaces.Displayable;
 import interfaces.Calculatable;
+import interfaces.Displayable;
 
 public class CartItem implements Displayable, Calculatable {
     private Product product;
@@ -32,9 +32,9 @@ public class CartItem implements Displayable, Calculatable {
 
     @Override
     public double calculateTotal() {
-        return product.getPrice() * quantity;
+        return getSubTotal();
     }
-
+    
     @Override
     public void displayInfo() {
         System.out.println("===== CART ITEM =====");
