@@ -79,22 +79,18 @@ public class Order implements Displayable, Calculatable, Printable{
             this.status = status;
         }
     }
-
+    // Order Class
     @Override
     public double calculateTotal() {
-
         double total = 0;
-
         for (OrderItem item : orderedItems) {
             total += item.getSubTotal();
         }
-
         return total;
     }
 
     @Override
     public void displayInfo() {
-
         System.out.println("===== ORDER INFO =====");
         System.out.println("Order ID: " + orderId);
         System.out.println("Customer: " + customer.getName());
@@ -103,17 +99,14 @@ public class Order implements Displayable, Calculatable, Printable{
 
     @Override
     public void printReceipt() {
-
         System.out.println("===== ORDER RECEIPT =====");
         System.out.println("Order ID: " + orderId);
         System.out.println("Customer: " + customer.getName());
         System.out.println("Number of items: " + orderedItems.size());
-
         for (OrderItem item : orderedItems) {
             System.out.println(
                 item.getProductName() + " x " + item.getQuantity() + " = $" + item.getSubTotal());
         }
-
         System.out.println("Total Amount Order: $" + calculateTotal());
     }
 

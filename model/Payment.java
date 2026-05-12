@@ -65,7 +65,7 @@ public class Payment implements Printable {
             this.paymentDate = paymentDate;
         }
     }
-
+    // Payment Class
     @Override
     public void printReceipt() {
         System.out.println("===== PAYMENT RECEIPT =====");

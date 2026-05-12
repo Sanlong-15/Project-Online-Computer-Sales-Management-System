@@ -119,7 +119,8 @@ public class Product implements Displayable {
     //            ", price=" + price + ", stock=" + stock + ", description=" + description +
     //            ", adminId=" + adminId + "]";
     // }
-
+    
+    // Product class 
     @Override
     public void displayInfo() {
         System.out.println("===== PRODUCT INFO =====");

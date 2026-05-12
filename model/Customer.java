@@ -3,11 +3,7 @@ package model;
 import interfaces.Displayable;
 import java.util.ArrayList;
 
-public class Customer implements Displayable {
-    private int customerId;
-    private String name;
-    private String age;
-    private String phone;
+public class Customer extends Person implements Displayable {
     private String email;
     private String address;
     private String city;
@@ -16,28 +12,18 @@ public class Customer implements Displayable {
     private ArrayList<Order> orders;
     private static int customerCount = 0;
 
-    public Customer(String address, String age, String city, int customerId, String email, String name, String phone, String postalCode) {
-        setAddress(address);
-        setAge(age);
-        setCity(city);
-        setCustomerId(customerId);
+    public Customer(int id, String name, String age, String phone, String email, String address, String city, String postalCode ) {
+
+        super(id, name, age, phone);
         setEmail(email);
-        setName(name);
-        setPhone(phone);
+        setAddress(address);
+        setCity(city);
         setPostalCode(postalCode);
         customerCount++;
     }
 
     public static int getCustomerCount() {
     return customerCount;
-}
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    private void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public ShoppingCart getCart() {
@@ -47,35 +33,7 @@ public class Customer implements Displayable {
     public void setCart(ShoppingCart cart) {
         this.cart = cart;
     }
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        if (name != null && !name.isEmpty()) {
-            this.name = name;
-        }
-    }
-
-    public String getAge() {
-        return age;
-    }
-    
-    public void setAge(String age) {
-        if (age != null && !age.isEmpty()) {
-            this.age = age;
-        }
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        if (phone != null && !phone.isEmpty()) {
-            this.phone = phone;
-        }
-    }
 
     public String getEmail() {
         return email;
@@ -117,20 +75,16 @@ public class Customer implements Displayable {
         }
     }
 
-    // @Override
-    // public String toString() {
-    //     return "Customer [customerId=" + customerId + ", name=" + name + ", age=" + age + ", phone=" + phone + 
-    //            ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + "]";
-    // }
-
     @Override
     public void displayInfo() {
         System.out.println("===== CUSTOMER INFO =====");
-        System.out.println("Customer ID: " + customerId);
-        System.out.println("Name: " + name);
-        System.out.println("Phone: " + phone);
-        System.out.println("Email: " + email);
-        System.out.println("Address: " + address);
+        System.out.println("Customer ID: " + getId());
+        System.out.println("Name: " + getName());
+        System.out.println("Phone: " + getPhone());
+        System.out.println("Email: " + getEmail());
+        System.out.println("Address: " + getAddress());
+        System.out.println("City: " + getCity());
+        System.out.println("Postal Code: " + getPostalCode());
     }
 
 }

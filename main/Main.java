@@ -6,16 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         // Create Customer
-        Customer customer = new Customer(
-            "Phnom Penh",   
-            "20",           
-            "Phnom Penh",   
-            1,              
-            "alice@email.com",
-            "Alice",
-            "012345678",
-            "12000"
-        );
+        Customer customer = new Customer("123 Main St", "alice@email.com", "Phnom Penh", "12000");
 
         // Create Seller
         Seller seller = new Seller(1, "Tech Store", "30", "098765432");
