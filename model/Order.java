@@ -26,6 +26,11 @@ public class Order implements Displayable, Calculatable, Printable{
             this.orderedItems.add(new OrderItem(item));
         }
         totalOrders++;
+
+        for (CartItem item : cart.getItems()) {
+            this.orderedItems.add(new OrderItem(item));
+            item.getProduct().reduceStock(item.getQuantity());
+        }
     }
 
     public ArrayList<OrderItem> getOrderedItems() {

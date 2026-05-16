@@ -26,7 +26,13 @@ public class Product implements Displayable {
         setStock(stock);
         totalProducts++;
     }
-  
+
+    public void reduceStock(int quantity) {
+        if (quantity > 0 && quantity <= stock) {
+            stock -= quantity;
+        }
+    }
+
     public static int getTotalProducts() {
         return totalProducts;
     }
