@@ -84,6 +84,7 @@ public class Order implements Displayable, Calculatable, Printable{
             this.status = status;
         }
     }
+    
     // Order Class
     @Override
     public double calculateTotal() {
