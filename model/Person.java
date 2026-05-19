@@ -1,17 +1,34 @@
 package model;
 
-public class Person {
+import interfaces.Displayable;
 
-    private int id;
-    private String name;
-    private String age;
-    private String phone;
+public class Person implements Displayable{
 
-    public Person(int id, String name, String age, String phone) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.phone = phone;
+    protected int id;
+    protected String name;
+    protected int age;
+    protected String phone;
+
+    public Person(int id, String name, int age, String phone) {
+        setId(id);
+        this.name = cleanText(name, "Unknown Name");
+        setAge(age);
+        this.phone = cleanText(phone, "No Phone");
+    }
+
+    private String cleanText(String value, String defaultValue) {
+        if (value == null || value.trim().isEmpty()) {
+            return defaultValue;
+        }
+        return value.trim();
+    }
+
+    private void setId(int id) {
+        if (id > 0) {
+            this.id = id;
+        } else {
+            this.id = 0;
+        }
     }
 
     public int getId() {
@@ -22,7 +39,7 @@ public class Person {
         return name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -30,25 +47,31 @@ public class Person {
         return phone;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setName(String name) {
-        if (name != null && !name.isEmpty()) {
-            this.name = name;
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name.trim();
         }
     }
 
-    public void setAge(String age) {
-        if (age != null && !age.isEmpty()) {
+    public void setAge(int age) {
+        if (age >= 0) {
             this.age = age;
+        } else {
+            this.age = 0;
         }
     }
 
     public void setPhone(String phone) {
-        if (phone != null && !phone.isEmpty()) {
-            this.phone = phone;
+        if (phone != null && !phone.trim().isEmpty()) {
+            this.phone = phone.trim();
         }
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Phone: " + phone);
     }
 }

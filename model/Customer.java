@@ -1,90 +1,96 @@
 package model;
 
-import interfaces.Displayable;
 import java.util.ArrayList;
 
-public class Customer extends Person implements Displayable {
-    private String email;
+public class Customer extends Person {
     private String address;
-    private String city;
-    private String postalCode; 
-    private ShoppingCart cart;
+    private String email;
+    private ShoppingCart shoppingCart;
     private ArrayList<Order> orders;
+
     private static int customerCount = 0;
 
-    public Customer(int id, String name, String age, String phone, String email, String address, String city, String postalCode ) {
-
-        super(id, name, age, phone);
-        setEmail(email);
+    public Customer(int customerId, String name, int age, String phone, String address, String email) {
+        super(customerId, name, age, phone);
         setAddress(address);
-        setCity(city);
-        setPostalCode(postalCode);
+        setEmail(email);
+        // after we all done I will open commentline
+        // this.shoppingCart = new ShoppingCart(this);
+        this.orders = new ArrayList<>();
         customerCount++;
     }
 
-    public static int getCustomerCount() {
-    return customerCount;
-    }
-
-    public ShoppingCart getCart() {
-        return cart;
-    }
-
-    public void setCart(ShoppingCart cart) {
-        this.cart = cart;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        if (email != null && !email.isEmpty()) {
-            this.email = email;
-        }
+    public int getCustomerId() {
+        return id;
     }
 
     public String getAddress() {
         return address;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
     public void setAddress(String address) {
-        if (address != null && !address.isEmpty()) {
-            this.address = address;
+        if (address == null || address.trim().isEmpty()) {
+            this.address = "No Address";
+        } else {
+            this.address = address.trim();
         }
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        if (city != null && !city.isEmpty()) {
-            this.city = city;
+    public void setEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            this.email = "No Email";
+        } else {
+            this.email = email.trim();
         }
     }
 
-    public String getPostalCode() {
-        return postalCode;
+    public void addOrder(Order order) {
+        if (order != null && !orders.contains(order)) {
+            orders.add(order);
+        }
     }
 
-    public void setPostalCode(String postalCode) {
-        if (postalCode != null && !postalCode.isEmpty()) {
-            this.postalCode = postalCode;
+    public ArrayList<Order> getOrdersCopy() {
+        return new ArrayList<>(orders);
+    }
+
+    public int getOrderHistorySize() {
+        return orders.size();
+    }
+
+    public void displayOrderHistory() {
+        System.out.println("\nOrder History for " + name + ":");
+
+        if (orders.isEmpty()) {
+            System.out.println("No orders yet.");
+            return;
+        }
+
+        for (Order order : orders) {
+            order.displayInfo();
         }
     }
 
     @Override
     public void displayInfo() {
-        System.out.println("===== CUSTOMER INFO =====");
-        System.out.println("Customer ID: " + getId());
-        System.out.println("Name: " + getName());
-        System.out.println("Phone: " + getPhone());
-        System.out.println("Email: " + getEmail());
-        System.out.println("Address: " + getAddress());
-        System.out.println("City: " + getCity());
-        System.out.println("Postal Code: " + getPostalCode());
+        System.out.println("Customer ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Phone: " + phone);
+        System.out.println("Address: " + address);
+        System.out.println("Email: " + email);
+        System.out.println("Total Orders: " + orders.size());
     }
 
+    public static int getCustomerCount() {
+        return customerCount;
+    }
 }

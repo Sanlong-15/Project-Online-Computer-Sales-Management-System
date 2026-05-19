@@ -6,14 +6,14 @@ public class Main {
     public static void main(String[] args) {
 
         // Create Customer
-        Customer customer = new Customer(1, "Sarah", "25", "123456789", "sarah@email.com", "123 Main St", "Phnom Penh", "12000");
+        Customer customer = new Customer(1, "Sarah", 25, "123456789", "123 Main St", "sarah@email.com");
 
         // Create Seller
-        Seller seller = new Seller(1, "Tech Store", "30", "098765432");
+        Seller seller = new Seller(1, "Tech Store", 30, "098765432", "Tech Store");
 
         // Create Products
-        Product p1 = new Product(1, "Dell", "A powerful laptop for work and gaming", "Laptop", 1500.0, 1, 10);
-        Product p2 = new Product(1, "Samsung", "Latest smartphone with advanced features", "Smartphone", 800.0, 2, 20);
+        Product p1 = new Product("Dell", "A powerful laptop for work and gaming", "Dell Laptop", 1500.0, 1, 10, seller);
+        Product p2 = new Product("Samsung", "Latest smartphone with advanced features", "Samsung Smartphone", 800.0, 2, 20, seller);
 
         // Display Product Info
         p1.displayInfo();

@@ -30,21 +30,29 @@ public class ShoppingCart implements Displayable, Calculatable, Manageable {
 
     // ShoppingCart Class
     @Override
-    public void addItem(Product product, int quantity) {
-        if (quantity > 0 && quantity <= product.getStock()) {
-            items.add(new CartItem(product, quantity));
-            System.out.println("Item added to cart.");
-        } else {
-            System.out.println("Not enough stock available.");
+    public boolean addItem(Product product, int quantity) {
+
+        if(product == null){
+            return false;
         }
+        if(quantity <=0){
+            return false;
+        }
+        if(quantity > product.getStock()){
+            return false;
+        }
+
+        items.add(new CartItem(product, quantity));
+        return true;
     }
 
     @Override
-    public void removeItem(Product product) {
-        items.removeIf(item ->
-            item.getProduct().getSerialNumberId()
-            == product.getSerialNumberId());
-        System.out.println("Item removed from cart.");
+    public boolean removeItemByProductId(int productId) {
+
+        return items.removeIf(item ->
+            item.getProduct()
+            .getSerialNumberId()==productId
+        );
     }
 
     @Override

@@ -9,19 +9,19 @@ public class Product implements Displayable {
     private String brand;
     private double price;
     private int stock;
+    private Seller seller;
     private String description;
-    private int adminId;
 
     private static int totalProducts = 0;
 
     private static ArrayList<Product> productList = new ArrayList<>();
 
-    public Product(int adminId, String brand, String description, String name, double price, int serialNumberId, int stock) {
-        setAdminId(adminId);
+    public Product(String brand, String description, String name, double price, int serialNumberId, int stock, Seller seller) {
         setBrand(brand);
         setDescription(description);
         setName(name);
         setPrice(price);
+        this.seller = seller;
         setSerialNumberId(serialNumberId);
         setStock(stock);
         totalProducts++;
@@ -111,21 +111,14 @@ public class Product implements Displayable {
         }
     }
 
-    public int getAdminId() {
-        return adminId;
+        public Seller getSeller() {
+        return seller;
     }
 
-    private void setAdminId(int adminId) {
-        this.adminId = adminId;
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 
-    // @Override
-    // public String toString() {
-    //     return "Product [serialNumberId=" + serialNumberId + ", name=" + name + ", brand=" + brand +
-    //            ", price=" + price + ", stock=" + stock + ", description=" + description +
-    //            ", adminId=" + adminId + "]";
-    // }
-    
     // Product class 
     @Override
     public void displayInfo() {

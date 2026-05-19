@@ -3,6 +3,7 @@ package interfaces;
 import model.Product;
 
 public interface Manageable {
-    void addItem(Product product, int quantity);
-    void removeItem(Product product);
+
+    boolean addItem(Product product, int quantity);
+    boolean removeItemByProductId(int productId);
 }
