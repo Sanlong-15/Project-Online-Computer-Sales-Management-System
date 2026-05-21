@@ -7,17 +7,18 @@ public class Product implements Displayable {
     private int serialNumberId;
     private String name;
     private String brand;
+    private String category;
     private double price;
     private int stock;
     private Seller seller;
     private String description;
 
     private static int totalProducts = 0;
-
     private static ArrayList<Product> productList = new ArrayList<>();
 
-    public Product(String brand, String description, String name, double price, int serialNumberId, int stock, Seller seller) {
+    public Product(String brand, String category, String description, String name, double price, int serialNumberId, int stock, Seller seller) {
         setBrand(brand);
+        setCategory(category);
         setDescription(description);
         setName(name);
         setPrice(price);
@@ -27,10 +28,17 @@ public class Product implements Displayable {
         totalProducts++;
     }
 
-    public void reduceStock(int quantity) {
-        if (quantity > 0 && quantity <= stock) {
-            stock -= quantity;
+    public boolean hasEnoughStock(int requestedQuantity) {
+        return requestedQuantity > 0 && requestedQuantity <= stock;
+    }
+
+    public boolean reduceStock(int quantity) {
+        if (!hasEnoughStock(quantity)) {
+            System.out.println("Cannot reduce stock for " + name + ". Requested quantity is invalid.");
+            return false;
         }
+        stock -= quantity;
+        return true;
     }
 
     public static int getTotalProducts() {
@@ -77,6 +85,16 @@ public class Product implements Displayable {
         }
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        if (category != null && !category.trim().isEmpty()) {
+            this.category = category.trim();
+        }
+    }
+
     public double getPrice() {
         return price;
     }
@@ -111,7 +129,7 @@ public class Product implements Displayable {
         }
     }
 
-        public Seller getSeller() {
+    public Seller getSeller() {
         return seller;
     }
 
@@ -119,16 +137,15 @@ public class Product implements Displayable {
         this.seller = seller;
     }
 
-    // Product class 
     @Override
     public void displayInfo() {
         System.out.println("===== PRODUCT INFO =====");
         System.out.println("ID: " + serialNumberId);
         System.out.println("Name: " + name);
         System.out.println("Brand: " + brand);
+        System.out.println("Category: " + category);
         System.out.println("Price: $" + price);
         System.out.println("Stock: " + stock);
         System.out.println("Description: " + description);
-
     }
 }

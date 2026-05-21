@@ -6,74 +6,118 @@ import interfaces.Manageable;
 import java.util.ArrayList;
 
 public class ShoppingCart implements Displayable, Calculatable, Manageable {
-    private int cartId;
     private Customer customer;
-    private ArrayList<CartItem> items;
+    private ArrayList<CartItem> cartItems;
+    private int nextCartItemId;
 
-    public ShoppingCart(int cartId, Customer customer) {
-        this.cartId = cartId;
+    public ShoppingCart(Customer customer) {
         this.customer = customer;
-        this.items = new ArrayList<>();
-    }
-
-    public ArrayList<CartItem> getItems() {
-        return items;
-    }
-
-    public int getCartId() {
-        return cartId;
+        this.cartItems = new ArrayList<>();
+        this.nextCartItemId = 1;
     }
 
     public Customer getCustomer() {
         return customer;
     }
 
-    // ShoppingCart Class
+    public boolean hasItems() {
+        return !cartItems.isEmpty();
+    }
+
+    public ArrayList<CartItem> getCartItemsCopy() {
+        return new ArrayList<>(cartItems);
+    }
+
+    private CartItem findCartItemByProductId(int productId) {
+        for (CartItem item : cartItems) {
+            if (item.getProduct() != null && item.getProduct().getSerialNumberId() == productId) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     @Override
     public boolean addItem(Product product, int quantity) {
-
-        if(product == null){
-            return false;
-        }
-        if(quantity <=0){
-            return false;
-        }
-        if(quantity > product.getStock()){
+        if (product == null) {
+            System.out.println("Cannot add a null product to the cart.");
             return false;
         }
 
-        items.add(new CartItem(product, quantity));
+        if (quantity <= 0) {
+            System.out.println("Quantity must be greater than zero.");
+            return false;
+        }
+
+        CartItem existingItem = findCartItemByProductId(product.getSerialNumberId());
+        int currentQuantity = 0;
+
+        if (existingItem != null) {
+            currentQuantity = existingItem.getQuantity();
+        }
+
+        int requestedTotalQuantity = currentQuantity + quantity;
+
+        if (!product.hasEnoughStock(requestedTotalQuantity)) {
+            System.out.println("Not enough stock for " + product.getName() + ".");
+            System.out.println("Requested total quantity: " + requestedTotalQuantity);
+            System.out.println("Available stock: " + product.getStock());
+            return false;
+        }
+
+        if (existingItem != null) {
+            existingItem.increaseQuantity(quantity);
+        } else {
+            cartItems.add(new CartItem(nextCartItemId, product, quantity));
+            nextCartItemId++;
+        }
+
         return true;
     }
 
     @Override
     public boolean removeItemByProductId(int productId) {
+        CartItem item = findCartItemByProductId(productId);
 
-        return items.removeIf(item ->
-            item.getProduct()
-            .getSerialNumberId()==productId
-        );
+        if (item == null) {
+            System.out.println("Product ID " + productId + " was not found in the cart.");
+            return false;
+        }
+
+        cartItems.remove(item);
+        return true;
+    }
+
+    public void clearCart() {
+        cartItems.clear();
     }
 
     @Override
-    public double calculateTotal() {
+    public double calculate() {
         double total = 0;
-        for (CartItem item : items) {
-            total += item.getSubTotal();
+        for (CartItem item : cartItems) {
+            total += item.calculate();
         }
         return total;
     }
 
     @Override
     public void displayInfo() {
-        System.out.println("===== SHOPPING CART =====");
-        System.out.println("Cart ID: " + cartId);
-        System.out.println("Customer: " + customer.getName());
-        for (CartItem item : items) {
-            item.displayInfo();
+        System.out.println("\n========== Shopping Cart ==========");
+
+        if (customer != null) {
+            System.out.println("Customer: " + customer.getName());
         }
-        System.out.println("Total Price: $" + calculateTotal());
+
+        if (cartItems.isEmpty()) {
+            System.out.println("Cart is empty.");
+        } else {
+            for (CartItem item : cartItems) {
+                item.displayInfo();
+            }
+        }
+
+        System.out.println("Cart Total: $" + calculate());
+        System.out.println("===================================");
     }
-
-
 }
