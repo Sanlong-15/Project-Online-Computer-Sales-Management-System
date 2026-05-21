@@ -1,61 +1,121 @@
 package main;
 
-import model.*;
-
 public class Main {
     public static void main(String[] args) {
+        ComputerSaleSystem system = new ComputerSaleSystem("S4 Computer Sale");
 
-        // Create Customer
-        Customer customer = new Customer(1, "Sarah", 25, "123456789", "123 Main St", "sarah@email.com");
-
-        // Create Seller
-        Seller seller = new Seller(1, "Tech Store", 30, "098765432", "Tech Store");
-
-        // Create Products
-        Product p1 = new Product("Dell", "A powerful laptop for work and gaming", "Dell Laptop", 1500.0, 1, 10, seller);
-        Product p2 = new Product("Samsung", "Latest smartphone with advanced features", "Samsung Smartphone", 800.0, 2, 20, seller);
-
-        // Display Product Info
-        p1.displayInfo();
-        System.out.println();
-        p2.displayInfo();
-        System.out.println();
-
-        // Create Cart
-        ShoppingCart cart = new ShoppingCart(1, customer);
-
-        // Add items
-        cart.addItem(p1, 1);
-        cart.addItem(p2, 2);
-
-        // Display Cart
-        cart.displayInfo();
-
-        // Create Order (checkout)
-        Order order = new Order(
-            customer,
-            "2026-05-05",
-            1001,
-            seller,
-            cart,
-            "Pending"
+        Customer customer1 = new Customer(
+            1,
+            "Dara",
+            20,
+            "012345678",
+            "Phnom Penh",
+            "dara@example.com"
         );
 
-        // Display Order
-        order.displayInfo();
-        
-        // Print Order Receipt
-        order.printReceipt();
-           
-        // Create Payment
-        Payment payment = new Payment(
-            order,
-            "2026-05-06",
-            5001,
-            "Credit Card"
-        );
-        // Display Payment Receipt
-        payment.printReceipt();
+        Seller seller1 = new Seller(1, "Sokha", 30, "011111111", "Sokha Computer Store");
+        Seller seller2 = new Seller(2, "Vanda", 28, "022222222", "Vanda Tech Shop");
 
+        system.addCustomer(customer1);
+        system.addSeller(seller1);
+        system.addSeller(seller2);
+
+        Product laptop = new Product(
+            101,
+            seller1,
+            "Lenovo ThinkPad",
+            "Lenovo",
+            "Laptop",
+            750.0,
+            5
+        );
+
+        Product mouse = new Product(
+            102,
+            seller1,
+            "Logitech Wireless Mouse",
+            "Logitech",
+            "Accessory",
+            15.0,
+            20
+        );
+
+        Product keyboard = new Product(
+            201,
+            seller2,
+            "Mechanical Keyboard",
+            "Keychron",
+            "Accessory",
+            80.0,
+            10
+        );
+
+        system.addProduct(laptop);
+        system.addProduct(mouse);
+        system.addProduct(keyboard);
+
+        System.out.println("Before order:");
+        system.displayAllProducts();
+
+        Product wrongSelection = system.searchProductById(999);
+
+        if (wrongSelection == null) {
+            System.out.println("\nInvalid product selection: Product ID 999 does not exist.");
+        }
+
+        Product selectedProduct1 = system.searchProductById(101);
+        Product selectedProduct2 = system.searchProductById(102);
+        Product selectedProduct3 = system.searchProductById(201);
+
+        customer1.getShoppingCart().addItem(selectedProduct1, 1);
+        customer1.getShoppingCart().addItem(selectedProduct2, 2);
+        customer1.getShoppingCart().addItem(selectedProduct3, 3);
+
+        customer1.getShoppingCart().displayInfo();
+
+        Order order1 = system.checkoutCart(1, customer1, "2026-05-18");
+
+        if (order1 != null) {
+            Payment payment1 = new Payment(1, order1, "ABA");
+            system.processPayment(payment1);
+
+            System.out.println("\nAfter order and payment:");
+            order1.displayInfo();
+            payment1.displayInfo();
+        }
+
+        System.out.println("\nProducts after checkout:");
+        system.displayAllProducts();
+
+        Order foundOrder = system.searchOrderById(1);
+
+        if (foundOrder != null) {
+            System.out.println("\nSearch result for Order 1:");
+            foundOrder.displayInfo();
+        }
+
+        customer1.displayOrderHistory();
+        seller1.displayProducts();
+        seller2.displayProducts();
+        system.displayInfo();
+
+        System.out.println("\nStatic counters vs collection size:");
+        System.out.println("Customer.getCustomerCount(): " + Customer.getCustomerCount());
+        System.out.println("system.getCustomerListSize(): " + system.getCustomerListSize());
+
+        System.out.println("Seller.getSellerCount(): " + Seller.getSellerCount());
+        System.out.println("system.getSellerListSize(): " + system.getSellerListSize());
+
+        System.out.println("Product.getProductCount(): " + Product.getProductCount());
+        System.out.println("system.getProductListSize(): " + system.getProductListSize());
+
+        System.out.println("Order.getOrderCount(): " + Order.getOrderCount());
+        System.out.println("system.getOrderListSize(): " + system.getOrderListSize());
+
+        System.out.println("OrderItem.getOrderItemCount(): " + OrderItem.getOrderItemCount());
+        System.out.println("CartItem.getCartItemCount(): " + CartItem.getCartItemCount());
+
+        System.out.println("Payment.getPaymentCount(): " + Payment.getPaymentCount());
+        System.out.println("system.getPaymentListSize(): " + system.getPaymentListSize());
     }
 }
