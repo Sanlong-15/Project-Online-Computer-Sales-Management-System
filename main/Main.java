@@ -27,34 +27,34 @@ public class Main {
             seller1,
             "Lenovo ThinkPad",
             "Lenovo",
-            "Laptop",
+            "Computer",
             750.0,
             5
         );
 
-        Product mouse = new Product(
+        Product desktop = new Product(
             102,
             seller1,
-            "Logitech Wireless Mouse",
-            "Logitech",
-            "Accessory",
-            15.0,
+            "Dell Desktop PC",
+            "Dell",
+            "Computer",
+            900.0,
             20
         );
 
-        Product keyboard = new Product(
+        Product gamingLaptop = new Product(
             201,
             seller2,
-            "Mechanical Keyboard",
-            "Keychron",
-            "Accessory",
+            "ASUS ROG Laptop",
+            "ASUS",
+            "Computer",
             80.0,
             10
         );
 
         system.addProduct(laptop);
-        system.addProduct(mouse);
-        system.addProduct(keyboard);
+        system.addProduct(desktop);
+        system.addProduct(gamingLaptop);
 
         System.out.println("Before order:");
         system.displayAllProducts();
