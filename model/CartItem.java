@@ -52,10 +52,11 @@ public class CartItem implements Displayable, Calculatable {
     }
 
     @Override
-    public double calculate() {
+    public double calculateTotal() {
         if (product == null) {
             return 0;
         }
+
         return product.getPrice() * quantity;
     }
 
@@ -65,10 +66,11 @@ public class CartItem implements Displayable, Calculatable {
             System.out.println("Invalid cart item: no product selected.");
             return;
         }
+
         System.out.println(
-            product.getName() +
+            product.getProductName() +
             " x " + quantity +
-            " = $" + calculate()
+            " = $" + calculateTotal()
         );
     }
 

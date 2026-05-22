@@ -1,5 +1,7 @@
 package main;
 
+import model.*;
+
 public class Main {
     public static void main(String[] args) {
         ComputerSaleSystem system = new ComputerSaleSystem("S4 Computer Sale");

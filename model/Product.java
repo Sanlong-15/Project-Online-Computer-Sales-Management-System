@@ -1,92 +1,82 @@
 package model;
 
 import interfaces.Displayable;
-import java.util.ArrayList;
 
 public class Product implements Displayable {
-    private int serialNumberId;
-    private String name;
+    private int productId; 
+    private Seller seller;
+    private String productName;
     private String brand;
     private String category;
     private double price;
     private int stock;
-    private Seller seller;
-    private String description;
 
-    private static int totalProducts = 0;
-    private static ArrayList<Product> productList = new ArrayList<>();
+    private static int productCount = 0;
 
-    public Product(String brand, String category, String description, String name, double price, int serialNumberId, int stock, Seller seller) {
-        setBrand(brand);
-        setCategory(category);
-        setDescription(description);
-        setName(name);
-        setPrice(price);
+    public Product(int productId, Seller seller, String productName, String brand, String category, double price, int stock) {
+        setProductId(productId);
         this.seller = seller;
-        setSerialNumberId(serialNumberId);
+        this.productName = cleanText(productName, "Unknown Product");
+        this.brand = cleanText(brand, "Unknown Brand");
+        this.category = cleanText(category, "General");
+        setPrice(price);
         setStock(stock);
-        totalProducts++;
+        productCount++;
     }
 
-    public boolean hasEnoughStock(int requestedQuantity) {
-        return requestedQuantity > 0 && requestedQuantity <= stock;
-    }
-
-    public boolean reduceStock(int quantity) {
-        if (!hasEnoughStock(quantity)) {
-            System.out.println("Cannot reduce stock for " + name + ". Requested quantity is invalid.");
-            return false;
+    private String cleanText(String value, String defaultValue) {
+        if (value == null || value.trim().isEmpty()) {
+            return defaultValue;
         }
-        stock -= quantity;
-        return true;
+        return value.trim();
     }
 
-    public static int getTotalProducts() {
-        return totalProducts;
-    }
-
-    public static void addProduct(Product product) {
-        productList.add(product);
-    }
-
-    public static int getProductListSize() {
-        return productList.size();
-    }
-
-    public static ArrayList<Product> getProductList() {
-        return productList;
-    }
-
-    public int getSerialNumberId() {
-        return serialNumberId;
-    }
-
-    private void setSerialNumberId(int serialNumberId) {
-        this.serialNumberId = serialNumberId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        if (name != null && !name.isEmpty()) {
-            this.name = name;
+    private void setProductId(int productId) {
+        if (productId > 0) {
+            this.productId = productId;
+        } else {
+            this.productId = 0;
         }
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
-        if (brand != null && !brand.isEmpty()) {
-            this.brand = brand;
+    public String getCategory() {
+        return category;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setProductName(String productName) {
+        if (productName != null && !productName.trim().isEmpty()) {
+            this.productName = productName.trim();
         }
     }
 
-    public String getCategory() {
-        return category;
+    public void setBrand(String brand) {
+        if (brand != null && !brand.trim().isEmpty()) {
+            this.brand = brand.trim();
+        }
     }
 
     public void setCategory(String category) {
@@ -95,57 +85,56 @@ public class Product implements Displayable {
         }
     }
 
-    public double getPrice() {
-        return price;
-    }
-
     public void setPrice(double price) {
         if (price >= 0) {
             this.price = price;
         } else {
-            System.out.println("Price cannot be negative. Value not updated.");
+            this.price = 0;
         }
-    }
-
-    public int getStock() {
-        return stock;
     }
 
     public void setStock(int stock) {
         if (stock >= 0) {
             this.stock = stock;
         } else {
-            System.out.println("Stock cannot be negative. Value not updated.");
+            this.stock = 0;
         }
     }
 
-    public String getDescription() {
-        return description;
+    public boolean hasEnoughStock(int requestedQuantity) {
+        return requestedQuantity > 0 && requestedQuantity <= stock;
     }
 
-    public void setDescription(String description) {
-        if (description != null) {
-            this.description = description;
+    public boolean reduceStock(int quantity) {
+        if (!hasEnoughStock(quantity)) {
+            System.out.println("Cannot reduce stock for " + productName + ". Requested quantity is invalid.");
+            return false;
         }
-    }
 
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
+        stock -= quantity;
+        return true;
     }
 
     @Override
     public void displayInfo() {
-        System.out.println("===== PRODUCT INFO =====");
-        System.out.println("ID: " + serialNumberId);
-        System.out.println("Name: " + name);
-        System.out.println("Brand: " + brand);
-        System.out.println("Category: " + category);
-        System.out.println("Price: $" + price);
-        System.out.println("Stock: " + stock);
-        System.out.println("Description: " + description);
+        String sellerName = "No Seller";
+
+        if (seller != null) {
+            sellerName = seller.getStoreName();
+        }
+
+        System.out.println(
+            "Product ID: " + productId +
+            " | Product: " + productName +
+            " | Brand: " + brand +
+            " | Category: " + category +
+            " | Seller: " + sellerName +
+            " | Price: $" + price +
+            " | Stock: " + stock
+        );
+    }
+
+    public static int getProductCount() {
+        return productCount;
     }
 }

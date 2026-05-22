@@ -1,78 +1,122 @@
 package model;
 
+import interfaces.Displayable;
 import interfaces.Printable;
 
-public class Payment implements Printable {
+public class Payment implements Displayable, Printable {
     private int paymentId;
     private Order order;
-    private String paymentMethod;
     private double amount;
-    private String paymentDate;
+    private String paymentMethod;
+    private String paymentStatus;
 
-    public Payment(Order order, String paymentDate, int paymentId, String paymentMethod) {
-        setOrder(order);
-        setPaymentDate(paymentDate);
+    private static int paymentCount = 0;
+
+    public Payment(int paymentId, Order order, String paymentMethod) {
         setPaymentId(paymentId);
-        setPaymentMethod(paymentMethod);
+        this.order = order;
+        this.paymentMethod = cleanText(paymentMethod, "Unknown Method");
+        this.paymentStatus = "Unpaid";
+        this.amount = calculateAmountFromOrder();
+        paymentCount++;
+    }
 
-    this.amount = order.calculateTotal();
-}
-
-    public int getPaymentId() {
-        return paymentId;
+    private String cleanText(String value, String defaultValue) {
+        if (value == null || value.trim().isEmpty()) {
+            return defaultValue;
+        }
+        return value.trim();
     }
 
     private void setPaymentId(int paymentId) {
-        this.paymentId = paymentId;
+        if (paymentId > 0) {
+            this.paymentId = paymentId;
+        } else {
+            this.paymentId = 0;
+        }
+    }
+
+    private double calculateAmountFromOrder() {
+        if (order == null) {
+            return 0;
+        }
+        return order.calculateTotal();
+    }
+
+    public int getPaymentId() {
+        return paymentId;
     }
 
     public Order getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public double getAmount() {
+        return amount;
     }
 
     public String getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        if (paymentMethod != null && !paymentMethod.isEmpty()) {
-            this.paymentMethod = paymentMethod;
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public boolean pay() {
+        if (order == null) {
+            System.out.println("Payment failed: no order connected.");
+            return false;
         }
-    }
 
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        if (amount >= 0) {
-            this.amount = amount;
-        } else {
-            System.out.println("Amount cannot be negative. Value not updated.");
+        if (!order.hasItems()) {
+            System.out.println("Payment failed: order has no items.");
+            return false;
         }
-    }
 
-    public String getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(String paymentDate) {
-        if (paymentDate != null && !paymentDate.isEmpty()) {
-            this.paymentDate = paymentDate;
+        if (!"Confirmed".equalsIgnoreCase(order.getStatus())) {
+            System.out.println("Payment failed: order must be confirmed first.");
+            return false;
         }
+
+        amount = order.calculateTotal();
+
+        if (amount <= 0) {
+            System.out.println("Payment failed: amount must be greater than 0.");
+            return false;
+        }
+
+        paymentStatus = "Paid";
+        order.markAsPaid();
+        return true;
     }
-    // Payment Class
+
+    public boolean isPaid() {
+        return "Paid".equalsIgnoreCase(paymentStatus);
+    }
+
     @Override
-    public void printReceipt() {
-        System.out.println("===== PAYMENT RECEIPT =====");
+    public void displayInfo() {
+        System.out.println("\n========== Payment Detail ==========");
         System.out.println("Payment ID: " + paymentId);
-        System.out.println("Order ID: " + order.getOrderId());
+
+        if (order != null) {
+            System.out.println("Order ID: " + order.getOrderId());
+        }
+
         System.out.println("Amount: $" + amount);
-        System.out.println("Payment Method: " + paymentMethod);
-        System.out.println("Payment Date: " + paymentDate);
+        System.out.println("Method: " + paymentMethod);
+        System.out.println("Status: " + paymentStatus);
+        System.out.println("====================================");
+    }
+
+    @Override
+    public void print() {
+        System.out.println("\n========== Payment Receipt ==========");
+        displayInfo();
+    }
+
+    public static int getPaymentCount() {
+        return paymentCount;
     }
 }

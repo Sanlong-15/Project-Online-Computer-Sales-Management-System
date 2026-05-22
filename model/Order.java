@@ -1,119 +1,164 @@
 package model;
 
+import java.util.ArrayList;
 import interfaces.Calculatable;
 import interfaces.Displayable;
 import interfaces.Printable;
-import java.util.ArrayList;
 
-public class Order implements Displayable, Calculatable, Printable{
+public class Order implements Displayable, Calculatable, Printable {
     private int orderId;
     private Customer customer;
-    private ArrayList<OrderItem> orderedItems;
-    private Seller seller;
+    private ArrayList<OrderItem> orderItems;
     private String orderDate;
     private String status;
-    private static int totalOrders = 0;
 
-    public Order(Customer customer, String orderDate, int orderId, Seller seller, ShoppingCart cart, String status) {
+    private static int orderCount = 0;
+
+    public Order(int orderId, Customer customer, String orderDate) {
         setOrderId(orderId);
-        setCustomer(customer);
-        setOrderDate(orderDate);
-        setSeller(seller);
-        setStatus(status);
-
-        this.orderedItems = new ArrayList<>();
-        for (CartItem item : cart.getItems()) {
-            this.orderedItems.add(new OrderItem(item));
-        }
-        totalOrders++;
-
-        for (CartItem item : cart.getItems()) {
-            this.orderedItems.add(new OrderItem(item));
-            item.getProduct().reduceStock(item.getQuantity());
-        }
+        this.customer = customer;
+        this.orderDate = cleanText(orderDate, "No Date");
+        this.orderItems = new ArrayList<>();
+        this.status = "Pending";
+        orderCount++;
     }
 
-    public ArrayList<OrderItem> getOrderedItems() {
-        return orderedItems;
+    private String cleanText(String value, String defaultValue) {
+        if (value == null || value.trim().isEmpty()) {
+            return defaultValue;
+        }
+        return value.trim();
     }
 
-    public static int getTotalOrders() {
-        return totalOrders;
+    private void setOrderId(int orderId) {
+        if (orderId > 0) {
+            this.orderId = orderId;
+        } else {
+            this.orderId = 0;
+        }
     }
 
     public int getOrderId() {
         return orderId;
     }
 
-    private void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
     public Customer getCustomer() {
         return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
     }
 
     public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(String orderDate) {
-        if (orderDate != null && !orderDate.isEmpty()) {
-            this.orderDate = orderDate;
-        }
-    }
-
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        if (status != null && !status.isEmpty()) {
-            this.status = status;
-        }
+    public boolean hasItems() {
+        return !orderItems.isEmpty();
     }
-    
-    // Order Class
+
+    public boolean isPaid() {
+        return "Paid".equalsIgnoreCase(status);
+    }
+
+    public ArrayList<OrderItem> getOrderItemsCopy() {
+        return new ArrayList<>(orderItems);
+    }
+
+    public boolean addOrderItem(OrderItem orderItem) {
+        if (!"Pending".equalsIgnoreCase(status)) {
+            System.out.println("Cannot add items. Order is already " + status + ".");
+            return false;
+        }
+
+        if (orderItem == null) {
+            System.out.println("Cannot add a null order item.");
+            return false;
+        }
+
+        orderItems.add(orderItem);
+        return true;
+    }
+
     @Override
     public double calculateTotal() {
         double total = 0;
-        for (OrderItem item : orderedItems) {
-            total += item.getSubTotal();
+
+        for (OrderItem item : orderItems) {
+            total += item.calculateTotal();
         }
+
         return total;
+    }
+
+    public boolean confirm() {
+        if (!"Pending".equalsIgnoreCase(status)) {
+            System.out.println("Order " + orderId + " is already " + status + ".");
+            return false;
+        }
+
+        if (customer == null) {
+            System.out.println("Order cannot be confirmed without a customer.");
+            return false;
+        }
+
+        if (orderItems.isEmpty()) {
+            System.out.println("Order cannot be confirmed without order items.");
+            return false;
+        }
+
+        status = "Confirmed";
+        return true;
+    }
+
+    public void markAsPaid() {
+        if ("Confirmed".equalsIgnoreCase(status)) {
+            status = "Paid";
+        }
+    }
+
+    public void cancel() {
+        if ("Paid".equalsIgnoreCase(status)) {
+            System.out.println("Paid order cannot be cancelled in this simple version.");
+            return;
+        }
+
+        status = "Cancelled";
     }
 
     @Override
     public void displayInfo() {
-        System.out.println("===== ORDER INFO =====");
+        System.out.println("\n========== Order Detail ==========");
         System.out.println("Order ID: " + orderId);
-        System.out.println("Customer: " + customer.getName());
-        System.out.println("Total Order Amount: $" + calculateTotal());
+        System.out.println("Date: " + orderDate);
+        System.out.println("Status: " + status);
+
+        if (customer != null) {
+            System.out.println("Customer: " + customer.getName());
+        }
+
+        System.out.println("Items:");
+
+        if (orderItems.isEmpty()) {
+            System.out.println("No items in this order.");
+        } else {
+            for (OrderItem item : orderItems) {
+                item.displayInfo();
+            }
+        }
+
+        System.out.println("Total: $" + calculateTotal());
+        System.out.println("==================================");
     }
 
     @Override
-    public void printReceipt() {
-        System.out.println("===== ORDER RECEIPT =====");
-        System.out.println("Order ID: " + orderId);
-        System.out.println("Customer: " + customer.getName());
-        System.out.println("Number of items: " + orderedItems.size());
-        for (OrderItem item : orderedItems) {
-            System.out.println(
-                item.getProductName() + " x " + item.getQuantity() + " = $" + item.getSubTotal());
-        }
-        System.out.println("Total Amount Order: $" + calculateTotal());
+    public void print() {
+        System.out.println("\n========== Order Receipt ==========");
+        displayInfo();
     }
 
+    public static int getOrderCount() {
+        return orderCount;
+    }
 }
