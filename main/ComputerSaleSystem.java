@@ -1,17 +1,17 @@
 package main;
 
 import interfaces.Displayable;
-import model.CartItem;
-import model.Customer;
-import model.Order;
-import model.Payment;
-import model.Product;
-import model.Seller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import model.ShoppingCart;
+import model.CartItem;
+import model.Customer;
+import model.Order;
 import model.OrderItem;
+import model.Payment;
+import model.Product;
+import model.Seller;
+import model.ShoppingCart;
 
 public class ComputerSaleSystem implements Displayable {
     private String systemName;

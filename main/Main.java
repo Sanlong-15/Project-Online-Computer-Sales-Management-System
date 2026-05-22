@@ -4,7 +4,7 @@ import model.*;
 
 public class Main {
     public static void main(String[] args) {
-        ComputerSaleSystem system = new ComputerSaleSystem("S4 Computer Sale");
+        ComputerSaleSystem system = new ComputerSaleSystem("CAM Computer Sale");
 
         Customer customer1 = new Customer(
             1,

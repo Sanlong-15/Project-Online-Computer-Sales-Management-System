@@ -14,8 +14,7 @@ public class Customer extends Person {
         super(customerId, name, age, phone);
         setAddress(address);
         setEmail(email);
-        // after we all done I will open commentline
-        // this.shoppingCart = new ShoppingCart(this);
+        this.shoppingCart = new ShoppingCart(this);
         this.orders = new ArrayList<>();
         customerCount++;
     }
