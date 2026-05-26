@@ -80,10 +80,7 @@ public class Customer extends Person {
 
     @Override
     public void displayInfo() {
-        System.out.println("Customer ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Phone: " + phone);
+        super.displayInfo();
         System.out.println("Address: " + address);
         System.out.println("Email: " + email);
         System.out.println("Total Orders: " + orders.size());

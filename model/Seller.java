@@ -38,8 +38,7 @@ public class Seller extends Person {
         }
 
         if (product.getSeller() != this) {
-            // after we all done I will open commentline
-            // System.out.println("Cannot add " + product.getProductName() + " to " + storeName + ".");
+            System.out.println("Cannot add " + product.getProductName() + " to " + storeName + ".");
             System.out.println("This product belongs to another seller.");
             return false;
         }
@@ -75,10 +74,7 @@ public class Seller extends Person {
 
     @Override
     public void displayInfo() {
-        System.out.println("Seller ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Phone: " + phone);
+        super.displayInfo();
         System.out.println("Store Name: " + storeName);
         System.out.println("Products: " + products.size());
     }
