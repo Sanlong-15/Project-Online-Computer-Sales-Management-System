@@ -92,22 +92,52 @@ public class Order implements Displayable, Calculatable, Printable {
         return total;
     }
 
+    public double calculateTotal(double discount) {
+    double total = calculateTotal();  
+
+    if (discount < 0 || discount > 100) {
+        System.out.println("Invalid discount. Must be between 0 and 100.");
+        return total;
+    }
+
+    double discountAmount = total * discount / 100;
+    return total - discountAmount;
+    }
+
+    public double calculateTotal(String couponCode) {
+        double total = calculateTotal();  
+
+        if (couponCode == null || couponCode.trim().isEmpty()) {
+            return total;
+        }
+
+        String code = couponCode.trim().toUpperCase();
+
+        if (code.equals("SAVE10")) {
+            return total - (total * 10 / 100);
+        } else if (code.equals("SAVE20")) {
+            return total - (total * 20 / 100);
+        } else if (code.equals("WELCOME50")) {
+            return total - 50;  
+        } else {
+            System.out.println("Invalid coupon code: " + couponCode);
+            return total;
+        }
+    }
+
     public boolean confirm() {
         if (!"Pending".equalsIgnoreCase(status)) {
             System.out.println("Order " + orderId + " is already " + status + ".");
             return false;
         }
-
         if (customer == null) {
             System.out.println("Order cannot be confirmed without a customer.");
             return false;
         }
-
         if (orderItems.isEmpty()) {
             System.out.println("Order cannot be confirmed without order items.");
             return false;
         }
-
         status = "Confirmed";
         return true;
     }

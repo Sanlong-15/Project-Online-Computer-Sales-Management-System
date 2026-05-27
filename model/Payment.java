@@ -68,19 +68,15 @@ public class Payment implements Displayable, Printable {
             System.out.println("Payment failed: no order connected.");
             return false;
         }
-
         if (!order.hasItems()) {
             System.out.println("Payment failed: order has no items.");
             return false;
         }
-
         if (!"Confirmed".equalsIgnoreCase(order.getStatus())) {
             System.out.println("Payment failed: order must be confirmed first.");
             return false;
         }
-
         amount = order.calculateTotal();
-
         if (amount <= 0) {
             System.out.println("Payment failed: amount must be greater than 0.");
             return false;
@@ -90,6 +86,27 @@ public class Payment implements Displayable, Printable {
         order.markAsPaid();
         return true;
     }
+
+    public boolean pay(String paymentMethod) {
+    if (paymentMethod == null || paymentMethod.trim().isEmpty()) {
+        System.out.println("Payment method cannot be empty. Using stored method.");
+        return pay();
+    }
+
+    String method = paymentMethod.trim();
+
+    if (method.equalsIgnoreCase("ABA")
+        || method.equalsIgnoreCase("ACLEDA")
+        || method.equalsIgnoreCase("Cash")) {
+
+        this.paymentMethod = method;
+        return pay();
+    } else {
+        System.out.println("Payment method '" + method + "' is not supported.");
+        System.out.println("Accepted methods: ABA, ACLEDA, Cash.");
+        return false;
+    }
+}
 
     public boolean isPaid() {
         return "Paid".equalsIgnoreCase(paymentStatus);
