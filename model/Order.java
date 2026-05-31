@@ -1,9 +1,9 @@
 package model;
 
-import java.util.ArrayList;
 import interfaces.Calculatable;
 import interfaces.Displayable;
 import interfaces.Printable;
+import java.util.ArrayList;
 
 public class Order implements Displayable, Calculatable, Printable {
     private int orderId;
