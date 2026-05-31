@@ -51,6 +51,16 @@ public class Seller extends Person {
         return false;
     }
 
+    public boolean addProduct(String productName, String brand, String category, double price, int stock) {
+        Product product = new Product(0, this, productName, brand, category, price, stock);
+        return addProduct(product);
+    }
+
+    public boolean addProduct(int productId, String productName, double price) {
+        Product product = new Product(productId, this, productName, "Unknown Brand", "General", price, 0);
+        return addProduct(product);
+    }
+
     public ArrayList<Product> getProductsCopy() {
         return new ArrayList<>(products);
     }
