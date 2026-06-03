@@ -1,6 +1,7 @@
 package main;
 
 import model.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -119,5 +120,31 @@ public class Main {
 
         System.out.println("Payment.getPaymentCount(): " + Payment.getPaymentCount());
         System.out.println("system.getPaymentListSize(): " + system.getPaymentListSize());
+
+        System.out.println("\n========== Polymorphism Test ==========");
+        System.out.println("\n[1] Person reference -> Customer object:");
+        Person personRef1 = customer1;
+        personRef1.displayInfo();
+
+        System.out.println("\n[2] Person reference -> Seller object:");
+        Person personRef2 = seller1;
+        personRef2.displayInfo();
+
+        System.out.println("\n[3] ArrayList<Person> with mixed objects:");
+        ArrayList<Person> people = new ArrayList<>();
+        people.add(customer1);  
+        people.add(seller1);    
+        people.add(seller2);    
+        System.out.println("People in list: " + people.size());
+
+        System.out.println("\n[4] Polymorphic loop same call, different results:");
+        for (Person person : people) {
+            System.out.println("----------------------------------------");
+            System.out.println("Real type: " + person.getClass().getSimpleName());
+            person.displayInfo();
+        }
+
+        System.out.println("========================================");
+        System.out.println("Total people in list: " + people.size());
     }
 }
