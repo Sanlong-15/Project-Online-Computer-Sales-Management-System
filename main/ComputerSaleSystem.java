@@ -85,7 +85,7 @@ public class ComputerSaleSystem implements Displayable {
 
     public Customer searchCustomerById(int customerId) {
         for (Customer customer : customers) {
-            if (customer.getCustomerId() == customerId) {
+            if (customer.getId() == customerId) {
                 return customer;
             }
         }
@@ -95,7 +95,7 @@ public class ComputerSaleSystem implements Displayable {
 
     public Seller searchSellerById(int sellerId) {
         for (Seller seller : sellers) {
-            if (seller.getSellerId() == sellerId) {
+            if (seller.getId() == sellerId) {
                 return seller;
             }
         }

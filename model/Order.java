@@ -118,7 +118,7 @@ public class Order implements Displayable, Calculatable, Printable {
         } else if (code.equals("SAVE20")) {
             return total - (total * 20 / 100);
         } else if (code.equals("WELCOME50")) {
-            return total - 50;  
+            return Math.max(0, total - 50);  
         } else {
             System.out.println("Invalid coupon code: " + couponCode);
             return total;

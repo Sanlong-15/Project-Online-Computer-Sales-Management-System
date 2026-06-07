@@ -121,30 +121,165 @@ public class Main {
         System.out.println("Payment.getPaymentCount(): " + Payment.getPaymentCount());
         System.out.println("system.getPaymentListSize(): " + system.getPaymentListSize());
 
-        System.out.println("\n========== Polymorphism Test ==========");
+        // --- SECTION 1: INHERITANCE ---
+        System.out.println("\n##########################################################");
+        System.out.println("# [SECTION 1] INHERITANCE                                #");
+        System.out.println("# Customer and Seller both extend Person.                #");
+        System.out.println("# They inherit: id, name, age, phone, and displayInfo(). #");
+        System.out.println("##########################################################");
+
+        System.out.println("\n--- Customer inherits from Person ---");
+        System.out.println("customer1.getId(): " + customer1.getId());
+        System.out.println("customer1.getName(): " + customer1.getName());
+        System.out.println("customer1.getAge(): " + customer1.getAge());
+        System.out.println("customer1.getPhone(): " + customer1.getPhone());
+        System.out.println("(These 4 getters are inherited from Person, not defined in Customer)");
+
+        System.out.println("\n--- Seller inherits from Person ---");
+        System.out.println("seller1.getId(): " + seller1.getId());
+        System.out.println("seller1.getName(): " + seller1.getName());
+        System.out.println("seller1.getAge(): " + seller1.getAge());
+        System.out.println("seller1.getPhone(): " + seller1.getPhone());
+        System.out.println("(These 4 getters are inherited from Person, not defined in Seller)");
+
+        // --- SECTION 2: METHOD OVERRIDING ---
+        System.out.println("\n##########################################################");
+        System.out.println("# [SECTION 2] METHOD OVERRIDING (@Override)              #");
+        System.out.println("# Customer.displayInfo() and Seller.displayInfo()        #");
+        System.out.println("# override Person.displayInfo().                         #");
+        System.out.println("# Each calls super.displayInfo() first, then adds more.  #");
+        System.out.println("##########################################################");
+
+        System.out.println("\n--- Person.displayInfo() (base class) ---");
+        System.out.println("(Shows only: ID, Name, Age, Phone)");
+        Person basePerson = new Person(99, "Test Person", 25, "099999999");
+        basePerson.displayInfo();
+
+        System.out.println("\n--- Customer.displayInfo() (overridden) ---");
+        System.out.println("(Shows Person fields + Address, Email, Total Orders)");
+        customer1.displayInfo();
+
+        System.out.println("\n--- Seller.displayInfo() (overridden) ---");
+        System.out.println("(Shows Person fields + Store Name, Products count)");
+        seller1.displayInfo();
+
+        // --- SECTION 3: METHOD OVERLOADING ---
+        System.out.println("\n##########################################################");
+        System.out.println("# [SECTION 3] METHOD OVERLOADING                         #");
+        System.out.println("# Same method name, different parameter lists.            #");
+        System.out.println("##########################################################");
+
+        // Order.calculateTotal() overloads
+        System.out.println("\n--- 3a. Order.calculateTotal() has 3 overloads ---");
+
+        System.out.println("\n[Overload 1] calculateTotal()  -->  no parameters");
+        double totalNoDiscount = order1.calculateTotal();
+        System.out.println("Total (no discount): $" + totalNoDiscount);
+
+        System.out.println("\n[Overload 2] calculateTotal(double discount)  -->  percentage discount");
+        double totalWith15Percent = order1.calculateTotal(15.0);
+        System.out.println("Total (15% discount): $" + totalWith15Percent);
+
+        System.out.println("\n[Overload 3] calculateTotal(String couponCode)  -->  coupon code");
+        double totalWithSave10 = order1.calculateTotal("SAVE10");
+        System.out.println("Total with SAVE10 coupon: $" + totalWithSave10);
+
+        double totalWithSave20 = order1.calculateTotal("SAVE20");
+        System.out.println("Total with SAVE20 coupon: $" + totalWithSave20);
+
+        double totalWithWelcome50 = order1.calculateTotal("WELCOME50");
+        System.out.println("Total with WELCOME50 coupon: $" + totalWithWelcome50);
+        System.out.println("(WELCOME50 subtracts $50, but total will not go below $0)");
+
+        double totalWithBadCoupon = order1.calculateTotal("FAKECODE");
+        System.out.println("Total with invalid coupon: $" + totalWithBadCoupon);
+
+        // Payment.pay() overloads
+        System.out.println("\n--- 3b. Payment.pay() has 2 overloads ---");
+        System.out.println("[Overload 1] pay()  -->  uses stored payment method");
+        System.out.println("(Already called during processPayment above)");
+
+        System.out.println("\n[Overload 2] pay(String paymentMethod)  -->  specify method at call time");
+        Payment testPayment = new Payment(99, order1, "Cash");
+        System.out.println("Trying testPayment.pay(\"ACLEDA\"):");
+        testPayment.pay("ACLEDA");
+        System.out.println("(Payment failed because order is already Paid, which is expected)");
+
+        // Seller.addProduct() overloads
+        System.out.println("\n--- 3c. Seller.addProduct() has 3 overloads ---");
+
+        System.out.println("\n[Overload 1] addProduct(Product product)  -->  pass a Product object");
+        Product monitor = new Product(301, seller1, "LG Monitor", "LG", "Peripheral", 250.0, 15);
+        seller1.addProduct(monitor);
+        System.out.println("Added 'LG Monitor' via addProduct(Product)");
+
+        System.out.println("\n[Overload 2] addProduct(String, String, String, double, int)  -->  auto-generate ID");
+        seller1.addProduct("Logitech Mouse", "Logitech", "Peripheral", 35.0, 50);
+        System.out.println("Added 'Logitech Mouse' via addProduct(String, String, String, double, int)");
+        System.out.println("(Product ID is auto-generated, not 0!)");
+
+        System.out.println("\n[Overload 3] addProduct(int, String, double)  -->  minimal info");
+        seller2.addProduct(302, "USB Hub", 15.0);
+        System.out.println("Added 'USB Hub' via addProduct(int, String, double)");
+
+        System.out.println("\nSeller1 products after overloaded adds:");
+        seller1.displayProducts();
+        System.out.println("\nSeller2 products after overloaded adds:");
+        seller2.displayProducts();
+
+        // ShoppingCart.addItem() overloads
+        System.out.println("\n--- 3d. ShoppingCart.addItem() has 2 overloads ---");
+        Customer customer2 = new Customer(2, "Bopha", 22, "033333333", "Siem Reap", "bopha@example.com");
+        system.addCustomer(customer2);
+        system.addProduct(monitor);
+
+        System.out.println("\n[Overload 1] addItem(Product, int quantity)  -->  specify quantity");
+        customer2.getShoppingCart().addItem(monitor, 2);
+        System.out.println("Added 2x LG Monitor via addItem(Product, int)");
+
+        System.out.println("\n[Overload 2] addItem(Product)  -->  default quantity = 1");
+        customer2.getShoppingCart().addItem(gamingLaptop);
+        System.out.println("Added 1x ASUS ROG Laptop via addItem(Product) (default qty=1)");
+
+        customer2.getShoppingCart().displayInfo();
+
+        // --- SECTION 4: POLYMORPHISM ---
+        System.out.println("\n##########################################################");
+        System.out.println("# [SECTION 4] POLYMORPHISM                               #");
+        System.out.println("# Person reference -> Customer or Seller object.          #");
+        System.out.println("# Same method call, different behavior at runtime.        #");
+        System.out.println("##########################################################");
+
         System.out.println("\n[1] Person reference -> Customer object:");
+        System.out.println("    Person personRef1 = customer1;");
         Person personRef1 = customer1;
+        System.out.println("    personRef1.displayInfo() calls Customer's version:");
         personRef1.displayInfo();
 
         System.out.println("\n[2] Person reference -> Seller object:");
+        System.out.println("    Person personRef2 = seller1;");
         Person personRef2 = seller1;
+        System.out.println("    personRef2.displayInfo() calls Seller's version:");
         personRef2.displayInfo();
 
-        System.out.println("\n[3] ArrayList<Person> with mixed objects:");
+        System.out.println("\n[3] ArrayList<Person> with mixed Customer & Seller objects:");
         ArrayList<Person> people = new ArrayList<>();
         people.add(customer1);  
+        people.add(customer2);
         people.add(seller1);    
         people.add(seller2);    
-        System.out.println("People in list: " + people.size());
+        System.out.println("    People in list: " + people.size());
 
-        System.out.println("\n[4] Polymorphic loop same call, different results:");
+        System.out.println("\n[4] Polymorphic loop — same call person.displayInfo(), different results:");
         for (Person person : people) {
             System.out.println("----------------------------------------");
-            System.out.println("Real type: " + person.getClass().getSimpleName());
+            System.out.println("Declared type: Person");
+            System.out.println("Actual type:   " + person.getClass().getSimpleName());
             person.displayInfo();
         }
 
         System.out.println("========================================");
         System.out.println("Total people in list: " + people.size());
+        System.out.println("\n===== END OF WEEK 7 OOP DEMONSTRATION =====");
     }
 }

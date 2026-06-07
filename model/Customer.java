@@ -19,9 +19,7 @@ public class Customer extends Person {
         customerCount++;
     }
 
-    public int getCustomerId() {
-        return id;
-    }
+
 
     public String getAddress() {
         return address;
@@ -66,7 +64,7 @@ public class Customer extends Person {
     }
 
     public void displayOrderHistory() {
-        System.out.println("\nOrder History for " + name + ":");
+        System.out.println("\nOrder History for " + getName() + ":");
 
         if (orders.isEmpty()) {
             System.out.println("No orders yet.");

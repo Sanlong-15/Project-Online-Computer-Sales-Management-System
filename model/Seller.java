@@ -7,6 +7,7 @@ public class Seller extends Person {
     private ArrayList<Product> products;
 
     private static int sellerCount = 0;
+    private int nextProductId = 1000;
 
     public Seller(int sellerId, String name, int age, String phone, String storeName) {
         super(sellerId, name, age, phone);
@@ -15,9 +16,8 @@ public class Seller extends Person {
         sellerCount++;
     }
 
-    public int getSellerId() {
-        return id;
-    }
+
+
 
     public String getStoreName() {
         return storeName;
@@ -52,7 +52,7 @@ public class Seller extends Person {
     }
 
     public boolean addProduct(String productName, String brand, String category, double price, int stock) {
-        Product product = new Product(0, this, productName, brand, category, price, stock);
+        Product product = new Product(nextProductId++, this, productName, brand, category, price, stock);
         return addProduct(product);
     }
 
