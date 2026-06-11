@@ -1,7 +1,7 @@
 package main;
 
-import model.*;
 import java.util.ArrayList;
+import model.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -142,35 +142,37 @@ public class Main {
         System.out.println("seller1.getPhone(): " + seller1.getPhone());
         System.out.println("(These 4 getters are inherited from Person, not defined in Seller)");
 
-        // --- SECTION 2: METHOD OVERRIDING ---
+        // --- SECTION 2: ABSTRACT CLASS ---
         System.out.println("\n##########################################################");
-        System.out.println("# [SECTION 2] METHOD OVERRIDING (@Override)              #");
+        System.out.println("# [SECTION 2] ABSTRACT CLASS                             #");
+        System.out.println("# Person is abstract, so we cannot do new Person(...).   #");
+        System.out.println("# We can only create Customer or Seller objects.          #");
+        System.out.println("##########################################################");
+
+        // --- SECTION 3: METHOD OVERRIDING ---
+        System.out.println("\n##########################################################");
+        System.out.println("# [SECTION 3] METHOD OVERRIDING (@Override)              #");
         System.out.println("# Customer.displayInfo() and Seller.displayInfo()        #");
         System.out.println("# override Person.displayInfo().                         #");
         System.out.println("# Each calls super.displayInfo() first, then adds more.  #");
         System.out.println("##########################################################");
 
-        System.out.println("\n--- Person.displayInfo() (base class) ---");
-        System.out.println("(Shows only: ID, Name, Age, Phone)");
-        Person basePerson = new Person(99, "Test Person", 25, "099999999");
-        basePerson.displayInfo();
-
         System.out.println("\n--- Customer.displayInfo() (overridden) ---");
-        System.out.println("(Shows Person fields + Address, Email, Total Orders)");
+        System.out.println("(Shows Person fields + Address, Email)");
         customer1.displayInfo();
 
         System.out.println("\n--- Seller.displayInfo() (overridden) ---");
         System.out.println("(Shows Person fields + Store Name, Products count)");
         seller1.displayInfo();
 
-        // --- SECTION 3: METHOD OVERLOADING ---
+        // --- SECTION 4: METHOD OVERLOADING ---
         System.out.println("\n##########################################################");
-        System.out.println("# [SECTION 3] METHOD OVERLOADING                         #");
+        System.out.println("# [SECTION 4] METHOD OVERLOADING                         #");
         System.out.println("# Same method name, different parameter lists.            #");
         System.out.println("##########################################################");
 
         // Order.calculateTotal() overloads
-        System.out.println("\n--- 3a. Order.calculateTotal() has 3 overloads ---");
+        System.out.println("\n--- 4a. Order.calculateTotal() has 3 overloads ---");
 
         System.out.println("\n[Overload 1] calculateTotal()  -->  no parameters");
         double totalNoDiscount = order1.calculateTotal();
@@ -195,7 +197,7 @@ public class Main {
         System.out.println("Total with invalid coupon: $" + totalWithBadCoupon);
 
         // Payment.pay() overloads
-        System.out.println("\n--- 3b. Payment.pay() has 2 overloads ---");
+        System.out.println("\n--- 4b. Payment.pay() has 2 overloads ---");
         System.out.println("[Overload 1] pay()  -->  uses stored payment method");
         System.out.println("(Already called during processPayment above)");
 
@@ -206,7 +208,7 @@ public class Main {
         System.out.println("(Payment failed because order is already Paid, which is expected)");
 
         // Seller.addProduct() overloads
-        System.out.println("\n--- 3c. Seller.addProduct() has 3 overloads ---");
+        System.out.println("\n--- 4c. Seller.addProduct() has 3 overloads ---");
 
         System.out.println("\n[Overload 1] addProduct(Product product)  -->  pass a Product object");
         Product monitor = new Product(301, seller1, "LG Monitor", "LG", "Peripheral", 250.0, 15);
@@ -228,7 +230,7 @@ public class Main {
         seller2.displayProducts();
 
         // ShoppingCart.addItem() overloads
-        System.out.println("\n--- 3d. ShoppingCart.addItem() has 2 overloads ---");
+        System.out.println("\n--- 4d. ShoppingCart.addItem() has 2 overloads ---");
         Customer customer2 = new Customer(2, "Bopha", 22, "033333333", "Siem Reap", "bopha@example.com");
         system.addCustomer(customer2);
         system.addProduct(monitor);
@@ -243,9 +245,9 @@ public class Main {
 
         customer2.getShoppingCart().displayInfo();
 
-        // --- SECTION 4: POLYMORPHISM ---
+        // --- SECTION 5: POLYMORPHISM ---
         System.out.println("\n##########################################################");
-        System.out.println("# [SECTION 4] POLYMORPHISM                               #");
+        System.out.println("# [SECTION 5] POLYMORPHISM                               #");
         System.out.println("# Person reference -> Customer or Seller object.          #");
         System.out.println("# Same method call, different behavior at runtime.        #");
         System.out.println("##########################################################");
@@ -270,7 +272,7 @@ public class Main {
         people.add(seller2);    
         System.out.println("    People in list: " + people.size());
 
-        System.out.println("\n[4] Polymorphic loop — same call person.displayInfo(), different results:");
+        System.out.println("\n[4] Polymorphic loop — same call, different results:");
         for (Person person : people) {
             System.out.println("----------------------------------------");
             System.out.println("Declared type: Person");
@@ -280,6 +282,5 @@ public class Main {
 
         System.out.println("========================================");
         System.out.println("Total people in list: " + people.size());
-        System.out.println("\n===== END OF WEEK 7 OOP DEMONSTRATION =====");
     }
 }

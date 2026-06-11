@@ -16,9 +16,6 @@ public class Seller extends Person {
         sellerCount++;
     }
 
-
-
-
     public String getStoreName() {
         return storeName;
     }
@@ -88,6 +85,7 @@ public class Seller extends Person {
         System.out.println("Store Name: " + storeName);
         System.out.println("Products: " + products.size());
     }
+
 
     public static int getSellerCount() {
         return sellerCount;

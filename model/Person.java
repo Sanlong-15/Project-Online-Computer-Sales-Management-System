@@ -2,8 +2,7 @@ package model;
 
 import interfaces.Displayable;
 
-public class Person implements Displayable{
-
+public abstract class Person implements Displayable{
     protected int id;
     protected String name;
     protected int age;
@@ -67,11 +66,11 @@ public class Person implements Displayable{
         }
     }
 
-    @Override
-    public void displayInfo() {
-        System.out.println("ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Phone: " + phone);
-    }
+@Override
+public void displayInfo() {
+    System.out.println("ID: " + id);
+    System.out.println("Name: " + name);
+    System.out.println("Age: " + age);
+    System.out.println("Phone Number: " + phone);
 }
+}

@@ -81,8 +81,8 @@ public class Customer extends Person {
         super.displayInfo();
         System.out.println("Address: " + address);
         System.out.println("Email: " + email);
-        System.out.println("Total Orders: " + orders.size());
     }
+
 
     public static int getCustomerCount() {
         return customerCount;
