@@ -87,6 +87,11 @@ public class Seller extends Person {
     }
 
 
+    @Override
+    public String getRole() {
+        return "Seller";
+    }
+
     public static int getSellerCount() {
         return sellerCount;
     }

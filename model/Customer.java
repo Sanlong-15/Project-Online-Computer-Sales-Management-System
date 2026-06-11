@@ -84,6 +84,11 @@ public class Customer extends Person {
     }
 
 
+    @Override
+    public String getRole() {
+        return "Customer";
+    }
+
     public static int getCustomerCount() {
         return customerCount;
     }

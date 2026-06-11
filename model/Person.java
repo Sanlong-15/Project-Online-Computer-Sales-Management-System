@@ -73,4 +73,6 @@ public void displayInfo() {
     System.out.println("Age: " + age);
     System.out.println("Phone Number: " + phone);
 }
+
+    public abstract String getRole();
 }
