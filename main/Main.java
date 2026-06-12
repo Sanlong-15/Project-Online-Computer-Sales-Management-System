@@ -276,7 +276,7 @@ public class Main {
         for (Person person : people) {
             System.out.println("----------------------------------------");
             System.out.println("Declared type: Person");
-            System.out.println("Actual type:   " + person.getClass().getSimpleName());
+            // System.out.println("Actual type:   " + person.getClass().getSimpleName());
             person.displayInfo();
         }
 
