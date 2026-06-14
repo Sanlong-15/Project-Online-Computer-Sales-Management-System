@@ -47,6 +47,7 @@ public class Product implements Displayable {
         return seller;
     }
 
+    
     public String getProductName() {
         return productName;
     }
