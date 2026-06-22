@@ -19,7 +19,13 @@ public class Product implements Displayable {
         this.productName = cleanText(productName, "Unknown Product");
         this.brand = cleanText(brand, "Unknown Brand");
         this.category = cleanText(category, "General");
-        setPrice(price);
+        
+        try {
+            setPrice(price);
+        } catch (InvalidPriceException e) {
+            System.out.println(e.getMessage());
+            this.price = 0;
+        }
         setStock(stock);
         productCount++;
     }
@@ -85,12 +91,11 @@ public class Product implements Displayable {
         }
     }
 
-    public void setPrice(double price) {
-        if (price >= 0) {
-            this.price = price;
-        } else {
-            this.price = 0;
+    public void setPrice(double price) throws InvalidPriceException {
+        if (price < 0.0) {
+            throw new InvalidPriceException("Price cannot be negative!");
         }
+        this.price = price;
     }
 
     public void setStock(int stock) {
