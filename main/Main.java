@@ -1,6 +1,8 @@
 package main;
 
 import java.util.ArrayList;
+import interfaces.Calculatable;
+import interfaces.BundleCalculator;
 import model.*;
 
 public class Main {
@@ -121,12 +123,11 @@ public class Main {
         System.out.println("Payment.getPaymentCount(): " + Payment.getPaymentCount());
         System.out.println("system.getPaymentListSize(): " + system.getPaymentListSize());
 
-        // --- SECTION 1: INHERITANCE ---
-        System.out.println("\n##########################################################");
-        System.out.println("# [SECTION 1] INHERITANCE                                #");
-        System.out.println("# Customer and Seller both extend Person.                #");
-        System.out.println("# They inherit: id, name, age, phone, and displayInfo(). #");
-        System.out.println("##########################################################");
+        System.out.println("\n||======================================================================||");
+        System.out.println("|| [SECTION 1] INHERITANCE                                ||");
+        System.out.println("|| Customer and Seller both extend Person.                ||");
+        System.out.println("|| They inherit: id, name, age, phone, and displayInfo(). ||");
+        System.out.println("||======================================================================||");
 
         System.out.println("\n--- Customer inherits from Person ---");
         System.out.println("customer1.getId(): " + customer1.getId());
@@ -142,20 +143,19 @@ public class Main {
         System.out.println("seller1.getPhone(): " + seller1.getPhone());
         System.out.println("(These 4 getters are inherited from Person, not defined in Seller)");
 
-        // --- SECTION 2: ABSTRACT CLASS ---
-        System.out.println("\n##########################################################");
-        System.out.println("# [SECTION 2] ABSTRACT CLASS                             #");
-        System.out.println("# Person is abstract, so we cannot do new Person(...).   #");
-        System.out.println("# We can only create Customer or Seller objects.          #");
-        System.out.println("##########################################################");
 
-        // --- SECTION 3: METHOD OVERRIDING ---
-        System.out.println("\n##########################################################");
-        System.out.println("# [SECTION 3] METHOD OVERRIDING (@Override)              #");
-        System.out.println("# Customer.displayInfo() and Seller.displayInfo()        #");
-        System.out.println("# override Person.displayInfo().                         #");
-        System.out.println("# Each calls super.displayInfo() first, then adds more.  #");
-        System.out.println("##########################################################");
+        System.out.println("\n||======================================================================||");
+        System.out.println("|| [SECTION 2] ABSTRACT CLASS                             ||");
+        System.out.println("|| Person is abstract, so we cannot do new Person(...).   ||");
+        System.out.println("|| We can only create Customer or Seller objects.          ||");
+        System.out.println("||======================================================================||");
+
+        System.out.println("\n||======================================================================||");
+        System.out.println("|| [SECTION 3] METHOD OVERRIDING (@Override)              ||");
+        System.out.println("|| Customer.displayInfo() and Seller.displayInfo()        ||");
+        System.out.println("|| override Person.displayInfo().                         ||");
+        System.out.println("|| Each calls super.displayInfo() first, then adds more.  ||");
+        System.out.println("||======================================================================||");
 
         System.out.println("\n--- Customer.displayInfo() (overridden) ---");
         System.out.println("(Shows Person fields + Address, Email)");
@@ -165,13 +165,11 @@ public class Main {
         System.out.println("(Shows Person fields + Store Name, Products count)");
         seller1.displayInfo();
 
-        // --- SECTION 4: METHOD OVERLOADING ---
-        System.out.println("\n##########################################################");
-        System.out.println("# [SECTION 4] METHOD OVERLOADING                         #");
-        System.out.println("# Same method name, different parameter lists.            #");
-        System.out.println("##########################################################");
+        System.out.println("\n||======================================================================||");
+        System.out.println("|| [SECTION 4] METHOD OVERLOADING                         ||");
+        System.out.println("|| Same method name, different parameter lists.            ||");
+        System.out.println("||======================================================================||");
 
-        // Order.calculateTotal() overloads
         System.out.println("\n--- 4a. Order.calculateTotal() has 3 overloads ---");
 
         System.out.println("\n[Overload 1] calculateTotal()  -->  no parameters");
@@ -207,7 +205,6 @@ public class Main {
         testPayment.pay("ACLEDA");
         System.out.println("(Payment failed because order is already Paid, which is expected)");
 
-        // Seller.addProduct() overloads
         System.out.println("\n--- 4c. Seller.addProduct() has 3 overloads ---");
 
         System.out.println("\n[Overload 1] addProduct(Product product)  -->  pass a Product object");
@@ -229,7 +226,6 @@ public class Main {
         System.out.println("\nSeller2 products after overloaded adds:");
         seller2.displayProducts();
 
-        // ShoppingCart.addItem() overloads
         System.out.println("\n--- 4d. ShoppingCart.addItem() has 2 overloads ---");
         Customer customer2 = new Customer(2, "Bopha", 22, "033333333", "Siem Reap", "bopha@example.com");
         system.addCustomer(customer2);
@@ -245,12 +241,11 @@ public class Main {
 
         customer2.getShoppingCart().displayInfo();
 
-        // --- SECTION 5: POLYMORPHISM ---
-        System.out.println("\n##########################################################");
-        System.out.println("# [SECTION 5] POLYMORPHISM                               #");
-        System.out.println("# Person reference -> Customer or Seller object.          #");
-        System.out.println("# Same method call, different behavior at runtime.        #");
-        System.out.println("##########################################################");
+        System.out.println("\n||======================================================================||");
+        System.out.println("|| POLYMORPHISM                               ||");
+        System.out.println("|| Person reference -> Customer or Seller object.          ||");
+        System.out.println("|| Same method call, different behavior at runtime.        ||   ");
+        System.out.println("||======================================================================||");
 
         System.out.println("\n[1] Person reference -> Customer object:");
         System.out.println("    Person personRef1 = customer1;");
@@ -282,5 +277,53 @@ public class Main {
 
         System.out.println("========================================");
         System.out.println("Total people in list: " + people.size());
+
+        System.out.println("\n||======================================================================||");
+        System.out.println("|| ANONYMOUS INNER CLASS: Calculatable                    ||");
+        System.out.println("|| No class name, defined and used in one place.          ||");
+        System.out.println("||======================================================================||");
+
+        Calculatable bundleDeal = new Calculatable() {
+            private final double pricePerItem = 199.99;
+            private final int quantity = 3;
+            private final double discount = 50.0;
+
+            @Override
+            public double calculateTotal() {
+                return (pricePerItem * quantity) - discount;
+            }
+        };
+
+        System.out.println("Bundle Deal Total: $" + bundleDeal.calculateTotal());
+        System.out.println("Is zero? " + bundleDeal.isZero());
+
+        // LAMBDA EXPRESSION: 
+        System.out.println("\n||======================================================================||");
+        System.out.println("|| LAMBDA EXPRESSION: Calculatable                        ||");
+        System.out.println("|| Same result as anonymous class, but no boilerplate.    ||");
+        System.out.println("||======================================================================||");
+
+        double pricePerItem = 199.99;
+        int quantity = 3;
+        double discount = 50.0;
+
+        Calculatable bundleLambda = () -> (pricePerItem * quantity) - discount;
+
+        System.out.println("Bundle Deal Total (lambda): $" + bundleLambda.calculateTotal());
+        System.out.println("Is zero? " + bundleLambda.isZero());
+
+        // CLEAR PARAMETER NAMES IN LAMBDA
+        System.out.println("\n||======================================================================||");
+        System.out.println("|| CLEAR PARAMETER NAMES IN LAMBDA                        ||");
+        System.out.println("||======================================================================||");
+
+        // BAD: short, unclear names and hard to read
+        BundleCalculator bad = (p, q, d) -> (p * q) - d;
+
+        // GOOD: full descriptive names and anyone can understand at a glance
+        BundleCalculator good = (itemPrice, itemQuantity, itemDiscount) -> (itemPrice * itemQuantity) - itemDiscount;
+
+        System.out.println("Bad  names result : $" + bad.calculate(199.99, 3, 50.0));
+        System.out.println("Good names result : $" + good.calculate(199.99, 3, 50.0));
     }
 }

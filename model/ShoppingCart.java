@@ -4,8 +4,6 @@ import interfaces.Calculatable;
 import interfaces.Displayable;
 import interfaces.Manageable;
 import java.util.ArrayList;
-
-
 public class ShoppingCart implements Displayable, Calculatable, Manageable {
     private Customer customer;
     private ArrayList<CartItem> cartItems;

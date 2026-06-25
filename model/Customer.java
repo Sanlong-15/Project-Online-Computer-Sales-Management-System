@@ -20,7 +20,6 @@ public class Customer extends Person {
     }
 
 
-
     public String getAddress() {
         return address;
     }
