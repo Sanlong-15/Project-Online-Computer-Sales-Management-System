@@ -1,8 +1,8 @@
 package main;
 
-import java.util.ArrayList;
-import interfaces.Calculatable;
 import interfaces.BundleCalculator;
+import interfaces.Calculatable;
+import java.util.ArrayList;
 import model.*;
 
 public class Main {
@@ -267,7 +267,7 @@ public class Main {
         people.add(seller2);    
         System.out.println("    People in list: " + people.size());
 
-        System.out.println("\n[4] Polymorphic loop — same call, different results:");
+        System.out.println("\n[4] Polymorphic loop, same call, different results:");
         for (Person person : people) {
             System.out.println("----------------------------------------");
             System.out.println("Declared type: Person");
@@ -323,7 +323,7 @@ public class Main {
         // GOOD: full descriptive names and anyone can understand at a glance
         BundleCalculator good = (itemPrice, itemQuantity, itemDiscount) -> (itemPrice * itemQuantity) - itemDiscount;
 
-        System.out.println("Bad  names result : $" + bad.calculate(199.99, 3, 50.0));
+        System.out.println("Bad names result : $" + bad.calculate(199.99, 3, 50.0));
         System.out.println("Good names result : $" + good.calculate(199.99, 3, 50.0));
     }
 }
